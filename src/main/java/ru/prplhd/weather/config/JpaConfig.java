@@ -27,7 +27,7 @@ public class JpaConfig {
             "hibernate.default-schema",
             "hibernate.hbm2ddl.auto"
     };
-    private static final String PACKAGE_TO_SCAN = "ru.prplhd.weather.persistence.entity";
+    private static final String PACKAGE_TO_SCAN = "ru.prplhd.weather.entity";
 
     private final Environment env;
     private final DataSource dataSource;

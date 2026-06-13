@@ -26,7 +26,9 @@ import java.util.concurrent.Executors;
         "ru.prplhd.weather.util",
         "ru.prplhd.weather.mapper",
         "ru.prplhd.weather.scheduler",
-        "ru.prplhd.weather.client"
+        "ru.prplhd.weather.client",
+        "ru.prplhd.weather.session",
+        "ru.prplhd.weather.validation"
 })
 public class AppConfig {
 
