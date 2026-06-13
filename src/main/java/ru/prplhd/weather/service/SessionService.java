@@ -84,5 +84,5 @@ public class SessionService {
     @Transactional
     public void deleteExpiredSessions() {
         sessionRepository.deleteExpiredSessions(clock.instant());
-    };
+    }
 }

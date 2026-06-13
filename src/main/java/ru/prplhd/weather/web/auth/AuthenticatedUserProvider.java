@@ -20,7 +20,7 @@ public class AuthenticatedUserProvider {
         this.sessionService = sessionService;
     }
 
-    public Optional<AuthenticatedUserDto> findAuthenticatedUser(HttpServletRequest request, HttpServletResponse response) {
+    public Optional<AuthenticatedUserDto> resolveAuthenticatedUser(HttpServletRequest request, HttpServletResponse response) {
         Optional<UUID> sessionIdOpt = sessionCookieManager.findSessionId(request);
 
         if (sessionIdOpt.isEmpty()) {

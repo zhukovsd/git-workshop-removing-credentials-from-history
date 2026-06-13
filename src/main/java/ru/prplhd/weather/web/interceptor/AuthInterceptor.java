@@ -21,7 +21,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
-        Optional<AuthenticatedUserDto> userOpt = authenticatedUserProvider.findAuthenticatedUser(request, response);
+        Optional<AuthenticatedUserDto> userOpt = authenticatedUserProvider.resolveAuthenticatedUser(request, response);
 
         if (userOpt.isEmpty()) {
             response.sendRedirect(request.getContextPath() + "/auth/sign-in");
