@@ -129,7 +129,7 @@ $TOMCAT_HOME/webapps
 http://localhost:8080/
 ```
 
-# Тесты
+## Тесты
 
 Запуск всех тестов:
 
