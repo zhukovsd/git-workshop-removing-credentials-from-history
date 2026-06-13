@@ -2,18 +2,32 @@ body {
     min-height: 100vh;
 }
 
-section#page-content {
-    min-height: calc(100vh - 164px);
+/* Auth pages */
+
+body.auth-background-page {
+    min-height: 100vh;
+    background-image: url("../images/background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
-.weather-card .weather-card-delete-form {
-    top: 8px;
-    right: 8px;
+.auth-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 32px 16px;
 }
 
-.weather-card img {
-    max-height: 150px;
-    object-fit: contain;
+.auth-card {
+    width: 100%;
+    max-width: 430px;
+    background-color: #ffffff;
+    border-radius: 18px;
+    padding: 32px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22);
 }
 
 .weather-logo {
@@ -21,10 +35,294 @@ section#page-content {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+}
 
-    min-height: 250px;
+.auth-logo {
+    min-height: 110px;
+    margin-bottom: 16px;
+}
+
+.auth-input {
+    min-height: 56px;
+    padding: 14px 16px;
+    font-size: 16px;
+}
+
+.auth-button {
+    min-height: 52px;
+    font-size: 17px;
+}
+
+.auth-card-footer {
+    font-size: 15px;
+}
+
+/* Weather pages */
+
+body.weather-background-page {
+    min-height: 100vh;
+    background-image: url("../images/background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #111827;
+}
+
+body.weather-background-page::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(255, 255, 255, 0);
+    pointer-events: none;
+    z-index: -1;
+}
+
+.weather-page {
+    min-height: calc(100vh - 132px);
+}
+
+.glass-navbar {
+    background: rgba(255, 255, 255, 0.68);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.55);
+    box-shadow: 0 8px 28px rgba(15, 23, 42, 0.12);
+}
+
+.glass-panel {
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    border-radius: 22px;
+    padding: 24px;
+    box-shadow: 0 14px 34px rgba(15, 23, 42, 0.14);
+    color: #111827;
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    border-radius: 22px;
+    box-shadow: 0 14px 34px rgba(15, 23, 42, 0.14);
+    color: #111827;
+    overflow: hidden;
+}
+
+.glass-input {
+    background: rgba(255, 255, 255, 0.86);
+    border-color: rgba(15, 23, 42, 0.18);
+    color: #111827;
+}
+
+.glass-input:focus {
+    background: rgba(255, 255, 255, 0.95);
+    color: #111827;
 }
 
 .location-search-input-group .clear-input-button {
-    border-color: rgb(222, 226, 230);
+    border-color: rgba(15, 23, 42, 0.18);
+    background: rgba(255, 255, 255, 0.72);
+}
+
+.weather-card .weather-card-delete-form {
+    top: 12px;
+    right: 12px;
+    z-index: 2;
+}
+
+.weather-card .btn-close {
+    background-color: rgba(255, 255, 255, 0.72);
+    border-radius: 50%;
+    padding: 10px;
+}
+
+.weather-card-icon {
+    max-height: 150px;
+    object-fit: contain;
+    padding-top: 16px;
+}
+
+.weather-temp {
+    font-size: 44px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.weather-location-title {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.search-location-card {
+    min-height: 240px;
+}
+
+a {
+    color: #0d6efd;
+}
+
+a:hover {
+    color: #084298;
+}
+
+@media (max-width: 576px) {
+    .glass-panel {
+        padding: 18px;
+        border-radius: 18px;
+    }
+
+    .glass-card {
+        border-radius: 18px;
+    }
+
+    .weather-temp {
+        font-size: 38px;
+    }
+
+    .navbar .container-fluid {
+        gap: 12px;
+    }
+}
+
+/* Error pages */
+
+.error-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 32px 16px;
+}
+
+.error-card {
+    width: 100%;
+    max-width: 620px;
+    text-align: center;
+
+    background: rgba(255, 255, 255, 0.62);
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    border-radius: 28px;
+    padding: 48px 36px;
+
+    box-shadow: 0 18px 44px rgba(15, 23, 42, 0.18);
+    color: #111827;
+}
+
+.error-card-large {
+    max-width: 760px;
+}
+
+.error-icon {
+    width: 76px;
+    height: 76px;
+    margin: 0 auto 24px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+    background: rgba(255, 193, 7, 0.92);
+    box-shadow: 0 0 36px rgba(255, 193, 7, 0.45);
+
+    font-size: 46px;
+    font-weight: 700;
+    line-height: 1;
+    color: #111827;
+}
+
+.error-code {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.06em;
+
+    font-size: clamp(110px, 15vw, 190px);
+    font-weight: 300;
+    line-height: 0.9;
+    letter-spacing: 0;
+    margin-bottom: 24px;
+}
+
+.sun-zero {
+    position: relative;
+    display: inline-block;
+
+    width: 0.62em;
+    height: 0.62em;
+
+    border-radius: 50%;
+    background-color: #ffc107;
+    box-shadow:
+            0 0 0 0.07em rgba(255, 193, 7, 0.22),
+            0 0 44px rgba(255, 193, 7, 0.70);
+
+    transform: translateY(0.02em);
+}
+
+.sun-zero::before {
+    content: "";
+    position: absolute;
+    inset: -0.16em;
+
+    border-radius: 50%;
+    border: 0.035em solid rgba(255, 193, 7, 0.42);
+}
+
+.sun-zero::after {
+    content: "";
+    position: absolute;
+    inset: -0.32em;
+
+    border-radius: 50%;
+    border: 0.025em solid rgba(255, 193, 7, 0.20);
+}
+
+.error-title {
+    font-size: clamp(34px, 4vw, 52px);
+    font-weight: 500;
+    line-height: 1.1;
+    margin-bottom: 16px;
+}
+
+.error-description {
+    max-width: 520px;
+    margin: 0 auto 28px;
+
+    font-size: 18px;
+    line-height: 1.55;
+    color: #1f2937;
+}
+
+.error-button {
+    min-width: 150px;
+    min-height: 46px;
+    padding: 10px 24px;
+    font-weight: 500;
+}
+
+@media (max-width: 576px) {
+    .error-card {
+        padding: 36px 22px;
+        border-radius: 22px;
+    }
+
+    .error-code {
+        font-size: clamp(92px, 26vw, 130px);
+    }
+
+    .error-title {
+        font-size: 32px;
+    }
+
+    .error-description {
+        font-size: 16px;
+    }
 }
