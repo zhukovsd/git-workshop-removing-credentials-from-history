@@ -2,7 +2,7 @@ package ru.prplhd.weather.client;
 
 import ru.prplhd.weather.dto.openweather.geocoding.LocationResponseDto;
 import ru.prplhd.weather.dto.openweather.currentweather.WeatherResponseDto;
-import ru.prplhd.weather.exception.OpenWeatherApiException;
+import ru.prplhd.weather.exception.openweather.OpenWeatherApiException;
 import tools.jackson.databind.json.JsonMapper;
 
 import java.io.IOException;

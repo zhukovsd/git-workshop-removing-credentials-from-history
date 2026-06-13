@@ -2,11 +2,12 @@ package ru.prplhd.weather.web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import ru.prplhd.weather.dto.location.AddLocationDto;
+import ru.prplhd.weather.dto.auth.AuthenticatedUserDto;
 import ru.prplhd.weather.dto.view.LocationSearchResultViewDto;
 import ru.prplhd.weather.service.LocationSearchService;
+import ru.prplhd.weather.service.UserLocationService;
 
 import java.util.List;
 
@@ -15,9 +16,11 @@ import java.util.List;
 public class LocationSearchController {
 
     private final LocationSearchService locationSearchService;
+    private final UserLocationService userLocationService;
 
-    public LocationSearchController(LocationSearchService locationSearchService) {
+    public LocationSearchController(LocationSearchService locationSearchService, UserLocationService userLocationService) {
         this.locationSearchService = locationSearchService;
+        this.userLocationService = userLocationService;
     }
 
     @GetMapping()
@@ -35,5 +38,14 @@ public class LocationSearchController {
         model.addAttribute("locations", locations);
 
         return "search-results";
+    }
+
+    @PostMapping("/add-location")
+    public String addLocation(@RequestAttribute(name = "authenticatedUserDto", required = false) AuthenticatedUserDto userDto,
+                              @ModelAttribute AddLocationDto addLocationDto
+    ) {
+        userLocationService.saveLocation(userDto.id(), addLocationDto);
+
+        return "redirect:/";
     }
 }

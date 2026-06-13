@@ -1,4 +1,4 @@
-package ru.prplhd.weather.exception;
+package ru.prplhd.weather.exception.openweather;
 
 public class OpenWeatherApiException extends RuntimeException {
     public OpenWeatherApiException(String message, Throwable cause) {

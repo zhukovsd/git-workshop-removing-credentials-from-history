@@ -53,11 +53,10 @@
 
                     <div class="card h-100 position-relative weather-card">
 
-                        <form class="position-absolute weather-card-delete-form"
-                              th:action="@{/locations/{id}(id=${location.id})}"
-                              method="post">
-                            <input type="hidden" name="_method" value="delete">
-                            <button type="submit" class="btn-close" aria-label="Delete"></button>
+                        <form th:action="@{/delete-location/{id}(id=${location.id})}"
+                              class="position-absolute weather-card-delete-form"
+                              th:method="delete">
+                            <button class="btn-close" aria-label="Delete" type="submit"></button>
                         </form>
 
                         <img class="card-img-top img-fluid"

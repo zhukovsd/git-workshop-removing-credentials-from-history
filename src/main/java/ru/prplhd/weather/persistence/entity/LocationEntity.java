@@ -1,10 +1,7 @@
 package ru.prplhd.weather.persistence.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.math.BigDecimal;
 
@@ -29,6 +26,7 @@ public class LocationEntity {
     @Column(name = "name", nullable = false, updatable = false)
     private String name;
 
+    @Setter
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false, updatable = false)
     private UserEntity user;

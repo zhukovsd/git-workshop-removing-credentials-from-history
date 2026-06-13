@@ -1,6 +1,7 @@
 package ru.prplhd.weather.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.prplhd.weather.client.OpenWeatherApiClient;
 import ru.prplhd.weather.dto.openweather.geocoding.LocationResponseDto;
 import ru.prplhd.weather.dto.view.LocationSearchResultViewDto;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional(readOnly = true)
 public class LocationSearchService {
 
     private final OpenWeatherApiClient openWeatherApiClient;

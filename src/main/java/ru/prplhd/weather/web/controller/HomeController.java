@@ -2,8 +2,7 @@ package ru.prplhd.weather.web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.*;
 import ru.prplhd.weather.dto.auth.AuthenticatedUserDto;
 import ru.prplhd.weather.dto.view.LocationWeatherViewDto;
 import ru.prplhd.weather.service.UserLocationService;
@@ -11,6 +10,7 @@ import ru.prplhd.weather.service.UserLocationService;
 import java.util.List;
 
 @Controller
+@RequestMapping("/")
 public class HomeController {
 
     private final UserLocationService userLocationService;
@@ -19,7 +19,7 @@ public class HomeController {
         this.userLocationService = userLocationService;
     }
 
-    @GetMapping("/")
+    @GetMapping()
     public String home(@RequestAttribute(name = "authenticatedUserDto", required = false) AuthenticatedUserDto userDto,
                        Model model
     ) {
@@ -32,4 +32,14 @@ public class HomeController {
         model.addAttribute("locations", locations);
         return "index";
     }
+
+    @DeleteMapping("/delete-location/{id}")
+    public String deleteLocation(@RequestAttribute(name = "authenticatedUserDto", required = false) AuthenticatedUserDto userDto,
+                                 @PathVariable("id") Long locationId
+    ) {
+        userLocationService.deleteLocation(locationId, userDto.id());
+
+        return "redirect:/";
+    }
+
 }

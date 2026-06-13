@@ -90,7 +90,15 @@
                             </p>
 
                             <div class="mt-auto">
-                                <button class="btn btn-primary w-100">Add</button>
+                                <form th:action="@{/search-results/add-location}" method="post">
+                                    <input type="hidden" name="name" th:value="${name}">
+                                    <input type="hidden" name="latitude" th:value="${location.latitude}">
+                                    <input type="hidden" name="longitude" th:value="${location.longitude}">
+
+                                    <button class="btn btn-primary w-100" type="submit">
+                                        Add
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>
