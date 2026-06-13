@@ -5,19 +5,13 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-import org.springframework.transaction.annotation.Transactional;
-import ru.prplhd.weather.config.AppConfig;
-import ru.prplhd.weather.config.DataSourceConfig;
-import ru.prplhd.weather.config.JpaConfig;
-import ru.prplhd.weather.config.LiquibaseConfig;
+import ru.prplhd.weather.config.WeatherIntegrationTest;
 import ru.prplhd.weather.dto.auth.SignInDto;
 import ru.prplhd.weather.dto.auth.SignUpDto;
-import ru.prplhd.weather.exception.auth.InvalidCredentialsException;
-import ru.prplhd.weather.exception.auth.LoginAlreadyExistsException;
 import ru.prplhd.weather.entity.SessionEntity;
 import ru.prplhd.weather.entity.UserEntity;
+import ru.prplhd.weather.exception.auth.InvalidCredentialsException;
+import ru.prplhd.weather.exception.auth.LoginAlreadyExistsException;
 import ru.prplhd.weather.repository.SessionRepository;
 import ru.prplhd.weather.repository.UserRepository;
 
@@ -30,14 +24,7 @@ import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-@SpringJUnitConfig(classes = {
-        AppConfig.class,
-        DataSourceConfig.class,
-        JpaConfig.class,
-        LiquibaseConfig.class
-})
-@TestPropertySource("classpath:app-test.properties")
-@Transactional
+@WeatherIntegrationTest
 @Tag("auth")
 class AuthServiceTest {
 
