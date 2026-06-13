@@ -1,10 +1,10 @@
-package ru.prplhd.weather.persistence.repository;
+package ru.prplhd.weather.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import ru.prplhd.weather.persistence.entity.SessionEntity;
+import ru.prplhd.weather.entity.SessionEntity;
 
 import java.time.Instant;
 import java.util.Optional;

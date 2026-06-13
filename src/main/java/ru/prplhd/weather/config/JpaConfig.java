@@ -18,7 +18,7 @@ import java.util.Properties;
 @Configuration
 @PropertySource("classpath:app.properties")
 @EnableTransactionManagement
-@EnableJpaRepositories("ru.prplhd.weather.persistence.repository")
+@EnableJpaRepositories("ru.prplhd.weather.repository")
 public class JpaConfig {
 
     private static final String[] HIBERNATE_PROPERTY_NAMES = {

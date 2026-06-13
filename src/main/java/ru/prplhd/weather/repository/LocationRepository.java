@@ -1,7 +1,7 @@
-package ru.prplhd.weather.persistence.repository;
+package ru.prplhd.weather.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ru.prplhd.weather.persistence.entity.LocationEntity;
+import ru.prplhd.weather.entity.LocationEntity;
 
 import java.math.BigDecimal;
 import java.util.List;

@@ -15,10 +15,10 @@ import ru.prplhd.weather.config.JpaConfig;
 import ru.prplhd.weather.config.LiquibaseConfig;
 import ru.prplhd.weather.dto.openweather.currentweather.*;
 import ru.prplhd.weather.dto.view.LocationWeatherViewDto;
-import ru.prplhd.weather.persistence.entity.LocationEntity;
-import ru.prplhd.weather.persistence.entity.UserEntity;
-import ru.prplhd.weather.persistence.repository.LocationRepository;
-import ru.prplhd.weather.persistence.repository.UserRepository;
+import ru.prplhd.weather.entity.LocationEntity;
+import ru.prplhd.weather.entity.UserEntity;
+import ru.prplhd.weather.repository.LocationRepository;
+import ru.prplhd.weather.repository.UserRepository;
 
 import java.math.BigDecimal;
 import java.util.List;

@@ -1,4 +1,4 @@
-package ru.prplhd.weather.web.advice;
+package ru.prplhd.weather.advice;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;

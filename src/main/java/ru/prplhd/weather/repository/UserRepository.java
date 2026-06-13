@@ -1,7 +1,7 @@
-package ru.prplhd.weather.persistence.repository;
+package ru.prplhd.weather.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ru.prplhd.weather.persistence.entity.UserEntity;
+import ru.prplhd.weather.entity.UserEntity;
 
 import java.util.Optional;
 

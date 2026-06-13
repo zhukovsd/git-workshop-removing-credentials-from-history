@@ -1,4 +1,4 @@
-package ru.prplhd.weather.web.controller;
+package ru.prplhd.weather.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -14,8 +14,8 @@ import ru.prplhd.weather.dto.auth.SignUpDto;
 import ru.prplhd.weather.exception.auth.InvalidCredentialsException;
 import ru.prplhd.weather.exception.auth.LoginAlreadyExistsException;
 import ru.prplhd.weather.service.AuthService;
-import ru.prplhd.weather.web.auth.SessionCookieManager;
-import ru.prplhd.weather.web.validation.SignUpDtoValidator;
+import ru.prplhd.weather.session.SessionCookieManager;
+import ru.prplhd.weather.validation.SignUpDtoValidator;
 
 import java.util.Optional;
 import java.util.UUID;

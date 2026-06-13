@@ -9,10 +9,13 @@ import org.springframework.web.servlet.config.annotation.*;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 import org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring6.view.ThymeleafViewResolver;
-import ru.prplhd.weather.web.interceptor.AuthInterceptor;
+import ru.prplhd.weather.interceptor.AuthInterceptor;
 
 @Configuration
-@ComponentScan("ru.prplhd.weather.web")
+@ComponentScan("ru.prplhd.weather.controller")
+@ComponentScan("ru.prplhd.weather.advice")
+@ComponentScan("ru.prplhd.weather.interceptor")
+@ComponentScan("ru.prplhd.weather.controller")
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
 

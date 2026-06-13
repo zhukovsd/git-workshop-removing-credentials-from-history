@@ -1,4 +1,4 @@
-package ru.prplhd.weather.web.controller;
+package ru.prplhd.weather.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -23,7 +23,7 @@ import java.util.concurrent.Executors;
 @EnableScheduling
 @ComponentScan({
         "ru.prplhd.weather.service",
-        "ru.prplhd.weather.persistence.util",
+        "ru.prplhd.weather.util",
         "ru.prplhd.weather.mapper",
         "ru.prplhd.weather.scheduler",
         "ru.prplhd.weather.client"

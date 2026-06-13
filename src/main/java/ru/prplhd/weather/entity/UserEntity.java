@@ -1,4 +1,4 @@
-package ru.prplhd.weather.persistence.entity;
+package ru.prplhd.weather.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

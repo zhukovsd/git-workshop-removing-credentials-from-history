@@ -16,10 +16,10 @@ import ru.prplhd.weather.dto.auth.SignInDto;
 import ru.prplhd.weather.dto.auth.SignUpDto;
 import ru.prplhd.weather.exception.auth.InvalidCredentialsException;
 import ru.prplhd.weather.exception.auth.LoginAlreadyExistsException;
-import ru.prplhd.weather.persistence.entity.SessionEntity;
-import ru.prplhd.weather.persistence.entity.UserEntity;
-import ru.prplhd.weather.persistence.repository.SessionRepository;
-import ru.prplhd.weather.persistence.repository.UserRepository;
+import ru.prplhd.weather.entity.SessionEntity;
+import ru.prplhd.weather.entity.UserEntity;
+import ru.prplhd.weather.repository.SessionRepository;
+import ru.prplhd.weather.repository.UserRepository;
 
 import java.time.Clock;
 import java.time.Duration;

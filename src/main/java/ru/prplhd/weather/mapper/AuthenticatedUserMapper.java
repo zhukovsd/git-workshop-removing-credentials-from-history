@@ -2,7 +2,7 @@ package ru.prplhd.weather.mapper;
 
 import org.mapstruct.Mapper;
 import ru.prplhd.weather.dto.auth.AuthenticatedUserDto;
-import ru.prplhd.weather.persistence.entity.UserEntity;
+import ru.prplhd.weather.entity.UserEntity;
 
 @Mapper(componentModel = "spring")
 public interface AuthenticatedUserMapper {

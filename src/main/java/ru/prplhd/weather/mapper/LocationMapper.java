@@ -4,7 +4,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import ru.prplhd.weather.dto.location.AddLocationDto;
-import ru.prplhd.weather.persistence.entity.LocationEntity;
+import ru.prplhd.weather.entity.LocationEntity;
 
 @Mapper(componentModel = "spring")
 public interface LocationMapper {

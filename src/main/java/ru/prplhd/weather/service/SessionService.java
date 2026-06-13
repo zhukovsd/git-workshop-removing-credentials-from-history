@@ -4,9 +4,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.prplhd.weather.dto.auth.AuthenticatedUserDto;
 import ru.prplhd.weather.mapper.AuthenticatedUserMapper;
-import ru.prplhd.weather.persistence.entity.SessionEntity;
-import ru.prplhd.weather.persistence.entity.UserEntity;
-import ru.prplhd.weather.persistence.repository.SessionRepository;
+import ru.prplhd.weather.entity.SessionEntity;
+import ru.prplhd.weather.entity.UserEntity;
+import ru.prplhd.weather.repository.SessionRepository;
 
 import java.time.Clock;
 import java.time.Duration;

@@ -1,11 +1,11 @@
-package ru.prplhd.weather.web.interceptor;
+package ru.prplhd.weather.interceptor;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import ru.prplhd.weather.dto.auth.AuthenticatedUserDto;
-import ru.prplhd.weather.web.auth.AuthenticatedUserProvider;
+import ru.prplhd.weather.session.AuthenticatedUserProvider;
 
 import java.io.IOException;
 import java.util.Optional;

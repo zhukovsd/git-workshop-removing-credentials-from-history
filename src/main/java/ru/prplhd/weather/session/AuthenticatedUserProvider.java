@@ -1,4 +1,4 @@
-package ru.prplhd.weather.web.auth;
+package ru.prplhd.weather.session;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

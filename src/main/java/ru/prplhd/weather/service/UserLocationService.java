@@ -11,10 +11,10 @@ import ru.prplhd.weather.exception.location.LocationNotFoundException;
 import ru.prplhd.weather.exception.openweather.OpenWeatherApiException;
 import ru.prplhd.weather.mapper.LocationMapper;
 import ru.prplhd.weather.mapper.LocationWeatherViewMapper;
-import ru.prplhd.weather.persistence.entity.LocationEntity;
-import ru.prplhd.weather.persistence.entity.UserEntity;
-import ru.prplhd.weather.persistence.repository.LocationRepository;
-import ru.prplhd.weather.persistence.repository.UserRepository;
+import ru.prplhd.weather.entity.LocationEntity;
+import ru.prplhd.weather.entity.UserEntity;
+import ru.prplhd.weather.repository.LocationRepository;
+import ru.prplhd.weather.repository.UserRepository;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

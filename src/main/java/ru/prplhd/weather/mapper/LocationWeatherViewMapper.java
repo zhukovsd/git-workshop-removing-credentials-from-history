@@ -5,7 +5,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import ru.prplhd.weather.dto.openweather.currentweather.WeatherResponseDto;
 import ru.prplhd.weather.dto.view.LocationWeatherViewDto;
-import ru.prplhd.weather.persistence.entity.LocationEntity;
+import ru.prplhd.weather.entity.LocationEntity;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

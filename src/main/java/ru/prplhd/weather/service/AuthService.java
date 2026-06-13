@@ -8,9 +8,9 @@ import ru.prplhd.weather.dto.auth.SignInDto;
 import ru.prplhd.weather.dto.auth.SignUpDto;
 import ru.prplhd.weather.exception.auth.InvalidCredentialsException;
 import ru.prplhd.weather.exception.auth.LoginAlreadyExistsException;
-import ru.prplhd.weather.persistence.entity.UserEntity;
-import ru.prplhd.weather.persistence.repository.UserRepository;
-import ru.prplhd.weather.persistence.util.ConstraintViolationHandler;
+import ru.prplhd.weather.entity.UserEntity;
+import ru.prplhd.weather.repository.UserRepository;
+import ru.prplhd.weather.util.ConstraintViolationHandler;
 
 import java.util.UUID;
 
