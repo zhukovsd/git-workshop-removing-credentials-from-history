@@ -45,7 +45,7 @@ public class OpenWeatherApiClient {
                 .GET()
                 .build();
 
-        String responseBody = send(request);
+        String responseBody = sendRequest(request);
 
         return parseLocations(responseBody);
     }
@@ -63,7 +63,7 @@ public class OpenWeatherApiClient {
         return URI.create(urlString);
     }
 
-    private String send(HttpRequest request) {
+    private String sendRequest(HttpRequest request) {
         try {
             HttpResponse<String> response = httpClient.send(
                     request,

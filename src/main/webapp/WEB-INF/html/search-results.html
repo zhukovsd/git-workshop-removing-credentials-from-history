@@ -32,89 +32,69 @@
 <section id="page-content">
     <div class="container mt-4">
         <div class="d-flex my-4">
-            <div class="input-group location-search-input-group me-3">
-                <input class="form-control" type="text" name="name" placeholder="Enter location" value="San Francisco"
-                       required>
-                <button class="btn btn-outline-secondary btn-sm clear-input-button" type="button"
-                        onclick="this.previousElementSibling.value=''">
-                    &times;
-                </button>
-            </div>
-            <button class="btn btn-outline-success">Search</button>
+
+            <form th:action="@{/search-results}", method="get" class="d-flex my-4 w-100">
+                <div class="input-group location-search-input-group flex-grow-1 me-3">
+                    <input class="form-control" type="text" name="name" placeholder="Enter location" th:value="${name}"
+                           required>
+                    <button class="btn btn-outline-secondary btn-sm clear-input-button" type="button"
+                            onclick="this.previousElementSibling.value=''">
+                        &times;
+                    </button>
+                </div>
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+
         </div>
 
         <div>
-            <h2>Locations:</h2>
-            <div class="row">
-                <div class="col-12 col-lg-3 col-md-6 mb-4">
+            <div th:if="${#strings.isEmpty(name)}" class="alert alert-secondary">
+                Enter location name to search
+            </div>
+
+            <div th:if="${!#strings.isEmpty(name) and locations.isEmpty()}"
+                 class="alert alert-secondary">
+                No locations found
+            </div>
+
+            <div class="row" th:if="${!locations.isEmpty()}">
+                <h2>Locations:</h2>
+
+                <div class="col-12 col-lg-3 col-md-6 mb-4"
+                     th:each="location : ${locations}">
+
                     <div class="card h-100">
                         <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">San Francisco</h5>
-                            <p class="card-text mb-1">Latitude: 37.7790262</p>
-                            <p class="card-text mb-1">Longitude: -122.419906</p>
-                            <p class="card-text mb-1">Country: US</p>
-                            <p class="card-text mb-3">State: California</p>
+
+                            <h5 class="card-title" th:text="${location.name}"></h5>
+
+                            <p class="card-text mb-1">
+                                Latitude:
+                                <span th:text="${location.lat}"></span>
+                            </p>
+
+                            <p class="card-text mb-1">
+                                Longitude:
+                                <span th:text="${location.lon}"></span>
+                            </p>
+
+                            <p class="card-text mb-1">
+                                Country:
+                                <span th:text="${location.country}"></span>
+                            </p>
+
+                            <p class="card-text mb-3"
+                               th:if="${location.state != null}">
+                                State:
+                                <span th:text="${location.state}"></span>
+                            </p>
+
                             <div class="mt-auto">
                                 <button class="btn btn-primary w-100">Add</button>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-12 col-lg-3 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">San Francisco</h5>
-                            <p class="card-text mb-1">Latitude: 8.5050281</p>
-                            <p class="card-text mb-1">Longitude: 125.9771179</p>
-                            <p class="card-text mb-1">Country: PH</p>
-                            <p class="card-text mb-3">State: Agusan del Sur</p>
-                            <div class="mt-auto">
-                                <button class="btn btn-primary w-100">Add</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-lg-3 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">San Francisco</h5>
-                            <p class="card-text mb-1">Latitude: -31.4249815</p>
-                            <p class="card-text mb-1">Longitude: -62.0840299</p>
-                            <p class="card-text mb-1">Country: AR</p>
-                            <p class="card-text mb-3">State: Córdoba</p>
-                            <div class="mt-auto">
-                                <button class="btn btn-primary w-100">Add</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-lg-3 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">San Francisco</h5>
-                            <p class="card-text mb-1">Latitude: 8.2467485</p>
-                            <p class="card-text mb-1">Longitude: -80.9721357</p>
-                            <p class="card-text mb-1">Country: PA</p>
-                            <p class="card-text mb-3">State: Veraguas</p>
-                            <div class="mt-auto">
-                                <button class="btn btn-primary w-100">Add</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-lg-3 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">San Francisco</h5>
-                            <p class="card-text mb-1">Latitude: 5.26902235</p>
-                            <p class="card-text mb-1">Longitude: -72.77388372073908</p>
-                            <p class="card-text mb-1">Country: CO</p>
-                            <p class="card-text mb-3">State: Casanare</p>
-                            <div class="mt-auto">
-                                <button class="btn btn-primary w-100">Add</button>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
