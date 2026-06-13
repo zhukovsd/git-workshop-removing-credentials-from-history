@@ -6,7 +6,7 @@ import ru.prplhd.weather.client.OpenWeatherApiClient;
 import ru.prplhd.weather.dto.location.AddLocationDto;
 import ru.prplhd.weather.dto.openweather.currentweather.WeatherResponseDto;
 import ru.prplhd.weather.dto.view.LocationWeatherViewDto;
-import ru.prplhd.weather.exception.location.LocationAlreadyExists;
+import ru.prplhd.weather.exception.location.LocationAlreadyExistsException;
 import ru.prplhd.weather.exception.location.LocationNotFoundException;
 import ru.prplhd.weather.mapper.LocationMapper;
 import ru.prplhd.weather.mapper.LocationWeatherViewMapper;
@@ -78,7 +78,7 @@ public class UserLocationService {
         );
 
         if (locationAlreadyExists) {
-            throw new LocationAlreadyExists("Location already exists for current user");
+            throw new LocationAlreadyExistsException("Location already exists for current user");
         }
 
         LocationEntity locationEntity = locationMapper.toEntity(addLocationDto);

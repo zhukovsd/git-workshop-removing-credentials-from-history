@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather Viewer - 404</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    <style>
+        body {
+            min-height: 100vh;
+            background-color: #fff;
+            color: #212529;
+        }
+
+        .error-container {
+            padding-top: 56px;
+        }
+
+        .error-code {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.06em;
+
+            font-size: clamp(96px, 12vw, 160px);
+            font-weight: 300;
+            line-height: 0.9;
+            letter-spacing: 0;
+            margin-bottom: 18px;
+        }
+
+        .sun-zero {
+            position: relative;
+            display: inline-block;
+            width: 0.62em;
+            height: 0.62em;
+            border-radius: 50%;
+            background-color: #ffc107;
+            box-shadow: 0 0 0 0.07em rgba(255, 193, 7, 0.28);
+
+            transform: translateY(0.02em);
+        }
+
+        .sun-zero::before {
+            content: "";
+            position: absolute;
+            inset: -0.14em;
+            border-radius: 50%;
+            border: 0.035em solid rgba(255, 193, 7, 0.45);
+        }
+
+        .error-title {
+            font-size: clamp(40px, 4vw, 56px);
+            font-weight: 300;
+            margin-bottom: 12px;
+        }
+
+        .error-description {
+            font-size: 18px;
+            margin-bottom: 24px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container text-center error-container">
+    <div class="error-code" aria-label="404">
+        4<span class="sun-zero" aria-hidden="true"></span>4
+    </div>
+
+    <h1 class="error-title">Page Not Found</h1>
+
+    <p class="lead error-description">
+        The page you are looking for does not exist or has been moved.
+    </p>
+
+    <a class="btn btn-primary" th:href="@{/}">
+        Go to Home
+    </a>
+</div>
+
+</body>
+</html>
