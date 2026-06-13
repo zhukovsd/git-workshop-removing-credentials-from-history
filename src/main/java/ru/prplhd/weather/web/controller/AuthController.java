@@ -36,7 +36,7 @@ public class AuthController {
     }
 
     @GetMapping("/sign-in")
-    public String signInPage(@ModelAttribute("signInDto") SignUpDto signUpDto) {
+    public String signInPage(@ModelAttribute("signInDto") SignInDto signUpDto) {
         return "sign-in";
     }
 

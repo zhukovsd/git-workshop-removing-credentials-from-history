@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
-    boolean existsByLogin(String login);
+    boolean existsByLoginIgnoreCase(String login);
 
     Optional<UserEntity> findByLoginIgnoreCase(String login);
 }

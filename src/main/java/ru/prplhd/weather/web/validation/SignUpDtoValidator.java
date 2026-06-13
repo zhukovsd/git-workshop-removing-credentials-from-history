@@ -37,7 +37,7 @@ public class SignUpDtoValidator implements Validator  {
             return;
         }
 
-        if (userRepository.existsByLogin(login)) {
+        if (userRepository.existsByLoginIgnoreCase(login)) {
             errors.rejectValue("login", "login.alreadyExists", "This login is already taken");
         }
     }
