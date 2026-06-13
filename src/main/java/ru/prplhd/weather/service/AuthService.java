@@ -11,6 +11,7 @@ import ru.prplhd.weather.exception.auth.InvalidCredentialsException;
 import ru.prplhd.weather.exception.auth.LoginAlreadyExistsException;
 import ru.prplhd.weather.repository.UserRepository;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -25,6 +26,12 @@ public class AuthService {
     @Transactional
     public void signUp(SignUpDto signUpDto) {
         String login = signUpDto.login();
+        String password = signUpDto.password();
+        String confirmPassword = signUpDto.confirmPassword();
+
+        if (!Objects.equals(password, confirmPassword)) {
+            throw new InvalidCredentialsException("Password confirmation does not match");
+        }
 
         if (userRepository.existsByLoginIgnoreCase(login)) {
             throw new LoginAlreadyExistsException("This login is already taken");

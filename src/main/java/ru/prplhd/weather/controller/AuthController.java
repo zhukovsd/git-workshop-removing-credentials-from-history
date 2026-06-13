@@ -16,7 +16,6 @@ import ru.prplhd.weather.exception.auth.InvalidCredentialsException;
 import ru.prplhd.weather.exception.auth.LoginAlreadyExistsException;
 import ru.prplhd.weather.service.AuthService;
 import ru.prplhd.weather.session.SessionCookieManager;
-import ru.prplhd.weather.validation.SignUpDtoValidator;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -27,7 +26,6 @@ import java.util.UUID;
 public class AuthController {
 
     private final AuthService authService;
-    private final SignUpDtoValidator signUpDtoValidator;
     private final SessionCookieManager sessionCookieManager;
 
     @GetMapping("/sign-in")
@@ -66,14 +64,17 @@ public class AuthController {
     public String signUp(@ModelAttribute("signUpDto") @Valid SignUpDto signUpDto,
                           BindingResult bindingResult) {
 
-        signUpDtoValidator.validate(signUpDto, bindingResult);
-
         if (bindingResult.hasErrors()) {
             return "sign-up";
         }
 
         try {
             authService.signUp(signUpDto);
+
+        } catch (InvalidCredentialsException e) {
+            bindingResult.rejectValue("password", "password.mismatch", e.getMessage());
+            return "sign-up";
+
         } catch (LoginAlreadyExistsException e) {
             bindingResult.rejectValue("login", "login.alreadyExists", e.getMessage());
             return "sign-up";
