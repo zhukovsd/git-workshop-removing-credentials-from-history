@@ -22,18 +22,18 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @Tag("locationWeather")
-public class LocationSearchServiceTest {
+public class ExternalLocationSearchServiceTest {
 
     @Mock
     private WeatherApiClient weatherApiClient;
 
-    private LocationSearchService locationSearchService;
+    private ExternalLocationSearchService externalLocationSearchService;
 
     @BeforeEach
     void prepareLocationSearchService() {
         LocationSearchResultViewMapper mapper = Mappers.getMapper(LocationSearchResultViewMapper.class);
 
-        locationSearchService = new LocationSearchService( weatherApiClient, mapper);
+        externalLocationSearchService = new ExternalLocationSearchService( weatherApiClient, mapper);
     }
 
     @Test
@@ -75,7 +75,7 @@ public class LocationSearchServiceTest {
         when(weatherApiClient.findLocationsByName(locationName))
                 .thenReturn(locations);
 
-        List<LocationSearchResultViewDto> result = locationSearchService.searchByName(locationName);
+        List<LocationSearchResultViewDto> result = externalLocationSearchService.searchByName(locationName);
 
         verify(weatherApiClient).findLocationsByName(locationName);
 

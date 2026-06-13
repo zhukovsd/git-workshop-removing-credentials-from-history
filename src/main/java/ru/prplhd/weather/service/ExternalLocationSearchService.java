@@ -2,7 +2,6 @@ package ru.prplhd.weather.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ru.prplhd.weather.client.WeatherApiClient;
 import ru.prplhd.weather.dto.openweather.geocoding.LocationResponseDto;
 import ru.prplhd.weather.dto.view.LocationSearchResultViewDto;
@@ -12,9 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class LocationSearchService {
+public class ExternalLocationSearchService {
 
     private final WeatherApiClient weatherApiClient;
     private final LocationSearchResultViewMapper locationSearchResultViewMapper;

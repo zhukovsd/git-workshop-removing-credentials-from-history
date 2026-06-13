@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.prplhd.weather.dto.location.SearchLocationDto;
 import ru.prplhd.weather.dto.view.LocationSearchResultViewDto;
-import ru.prplhd.weather.service.LocationSearchService;
+import ru.prplhd.weather.service.ExternalLocationSearchService;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class LocationSearchController {
 
-    private final LocationSearchService locationSearchService;
+    private final ExternalLocationSearchService externalLocationSearchService;
 
     @GetMapping()
     public String searchLocationsPage(@ModelAttribute @Valid SearchLocationDto searchLocationDto,
@@ -38,7 +38,7 @@ public class LocationSearchController {
             return "search-results";
         }
 
-        List<LocationSearchResultViewDto> locations = locationSearchService.searchByName(searchLocationDto.name());
+        List<LocationSearchResultViewDto> locations = externalLocationSearchService.searchByName(searchLocationDto.name());
         model.addAttribute("locations", locations);
 
         return "search-results";
