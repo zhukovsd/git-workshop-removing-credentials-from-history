@@ -90,7 +90,7 @@
                             </p>
 
                             <div class="mt-auto">
-                                <form th:action="@{/search-results}" method="post">
+                                <form th:action="@{/locations}" method="post">
                                     <input type="hidden" name="name" th:value="${name}">
                                     <input type="hidden" name="latitude" th:value="${location.latitude}">
                                     <input type="hidden" name="longitude" th:value="${location.longitude}">

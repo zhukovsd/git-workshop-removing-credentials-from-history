@@ -32,14 +32,4 @@ public class HomeController {
         model.addAttribute("locations", locations);
         return "index";
     }
-
-    @DeleteMapping("/locations/{id}")
-    public String deleteLocation(@RequestAttribute("authenticatedUserDto") AuthenticatedUserDto userDto,
-                                 @PathVariable("id") Long locationId
-    ) {
-        userLocationService.deleteLocation(locationId, userDto.id());
-
-        return "redirect:/";
-    }
-
 }
