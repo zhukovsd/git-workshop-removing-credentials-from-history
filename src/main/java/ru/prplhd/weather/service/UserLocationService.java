@@ -26,9 +26,10 @@ import java.util.concurrent.CompletionException;
 import java.util.concurrent.ExecutorService;
 
 @Service
-@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class UserLocationService {
+
+    private final UserLocationReader userLocationReader;
 
     private final LocationRepository locationRepository;
     private final UserRepository userRepository;
@@ -40,8 +41,39 @@ public class UserLocationService {
     private final LocationMapper locationMapper;
 
     public List<LocationWeatherViewDto> findUserLocationsWithCurrentWeather(Long userId) {
-        List<LocationEntity> userLocations = locationRepository.findAllByUser_Id(userId);
+        List<LocationEntity> userLocations = userLocationReader.findUserLocations(userId);
 
+        return enrichLocationsWithWeather(userLocations);
+    }
+
+    @Transactional
+    public void saveLocation(Long userId, AddLocationDto addLocationDto) {
+        boolean locationAlreadyExists = locationRepository.existsByUser_IdAndLatitudeAndLongitude(
+                userId,
+                CoordinateNormalizer.normalize(addLocationDto.latitude()),
+                CoordinateNormalizer.normalize(addLocationDto.longitude())
+        );
+
+        if (locationAlreadyExists) {
+            throw new LocationAlreadyExistsException("Location already exists for current user");
+        }
+
+        UserEntity userReference = userRepository.getReferenceById(userId);
+        LocationEntity locationEntity = locationMapper.toEntity(addLocationDto, userReference);
+
+        locationRepository.save(locationEntity);
+    }
+
+    @Transactional
+    public void deleteLocation(Long locationId, Long userId) {
+        long deletedLocations = locationRepository.deleteByIdAndUser_Id(locationId, userId);
+
+        if (deletedLocations == 0) {
+            throw new LocationNotFoundException("Location does not exist or does not belong to current user");
+        }
+    }
+
+    private List<LocationWeatherViewDto> enrichLocationsWithWeather(List<LocationEntity> userLocations) {
         List<CompletableFuture<LocationWeatherViewDto>> futures = new ArrayList<>();
 
         for (LocationEntity userLocation : userLocations) {
@@ -75,32 +107,5 @@ public class UserLocationService {
         }
 
         return result;
-    }
-
-    @Transactional
-    public void saveLocation(Long userId, AddLocationDto addLocationDto) {
-        boolean locationAlreadyExists = locationRepository.existsByUser_IdAndLatitudeAndLongitude(
-                userId,
-                CoordinateNormalizer.normalize(addLocationDto.latitude()),
-                CoordinateNormalizer.normalize(addLocationDto.longitude())
-        );
-
-        if (locationAlreadyExists) {
-            throw new LocationAlreadyExistsException("Location already exists for current user");
-        }
-
-        UserEntity userReference = userRepository.getReferenceById(userId);
-        LocationEntity locationEntity = locationMapper.toEntity(addLocationDto, userReference);
-
-        locationRepository.save(locationEntity);
-    }
-
-    @Transactional
-    public void deleteLocation(Long locationId, Long userId) {
-        long deletedLocations = locationRepository.deleteByIdAndUser_Id(locationId, userId);
-
-        if (deletedLocations == 0) {
-            throw new LocationNotFoundException("Location does not exist or does not belong to current user");
-        }
     }
 }
