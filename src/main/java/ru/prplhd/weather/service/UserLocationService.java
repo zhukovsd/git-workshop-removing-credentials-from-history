@@ -8,6 +8,7 @@ import ru.prplhd.weather.dto.openweather.currentweather.WeatherResponseDto;
 import ru.prplhd.weather.dto.view.LocationWeatherViewDto;
 import ru.prplhd.weather.exception.location.LocationAlreadyExistsException;
 import ru.prplhd.weather.exception.location.LocationNotFoundException;
+import ru.prplhd.weather.exception.openweather.OpenWeatherApiException;
 import ru.prplhd.weather.mapper.LocationMapper;
 import ru.prplhd.weather.mapper.LocationWeatherViewMapper;
 import ru.prplhd.weather.persistence.entity.LocationEntity;
@@ -20,6 +21,7 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionException;
 import java.util.concurrent.ExecutorService;
 
 @Service
@@ -73,7 +75,14 @@ public class UserLocationService {
         List<LocationWeatherViewDto> result = new ArrayList<>();
 
         for (CompletableFuture<LocationWeatherViewDto> future : futures) {
-            result.add(future.join());
+            try {
+                result.add(future.join());
+            } catch (CompletionException e) {
+
+                if (e.getCause() instanceof OpenWeatherApiException openWeatherException) {
+                    throw  openWeatherException;
+                }
+            }
         }
 
         return result;
