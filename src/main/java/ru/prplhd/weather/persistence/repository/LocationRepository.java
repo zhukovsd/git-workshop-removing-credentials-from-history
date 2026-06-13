@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public interface LocationRepository extends JpaRepository<LocationEntity, Long> {
-    List<LocationEntity> findAllByUserId(Long userId);
+    List<LocationEntity> findAllByUser_Id(Long userId);
 
     boolean existsByUser_IdAndLatitudeAndLongitude(Long userId, BigDecimal latitude, BigDecimal longitude);
 

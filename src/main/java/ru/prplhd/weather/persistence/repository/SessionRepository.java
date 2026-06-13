@@ -24,7 +24,7 @@ public interface SessionRepository extends JpaRepository<SessionEntity, UUID> {
     @Query("""
            DELETE
            FROM SessionEntity s
-           WHERE s.expiresAt < :now
+           WHERE s.expiresAt <= :now
            """)
     void deleteExpiredSessions(@Param("now") Instant now);
 }

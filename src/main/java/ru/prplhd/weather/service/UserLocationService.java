@@ -51,7 +51,7 @@ public class UserLocationService {
     }
 
     public List<LocationWeatherViewDto> findUserLocationsWithCurrentWeather(Long userId) {
-        List<LocationEntity> userLocations = locationRepository.findAllByUserId(userId);
+        List<LocationEntity> userLocations = locationRepository.findAllByUser_Id(userId);
 
         List<CompletableFuture<LocationWeatherViewDto>> futures = new ArrayList<>();
 
