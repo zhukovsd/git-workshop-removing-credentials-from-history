@@ -26,3 +26,10 @@ databaseChangeLog:
       changes:
         - sqlFile:
             path: db/changelog/changes/004-rename-users-password-to-password-hash.sql
+
+  - changeSet:
+      id: 005-add-unique-constraint-for-locations-per-user
+      author: prplhd
+      changes:
+        - sqlFile:
+            path: db/changelog/changes/005-add-unique-constraint-for-locations-per-user.sql
