@@ -5,7 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.prplhd.weather.dto.openweather.geocoding.LocationResponseDto;
+import ru.prplhd.weather.dto.view.LocationSearchResultViewDto;
 import ru.prplhd.weather.service.LocationSearchService;
 
 import java.util.List;
@@ -31,7 +31,7 @@ public class LocationSearchController {
             return "search-results";
         }
 
-        List<LocationResponseDto> locations = locationSearchService.searchByName(name);
+        List<LocationSearchResultViewDto> locations = locationSearchService.searchByName(name);
         model.addAttribute("locations", locations);
 
         return "search-results";
