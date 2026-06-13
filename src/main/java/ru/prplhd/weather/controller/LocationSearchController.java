@@ -1,5 +1,6 @@
 package ru.prplhd.weather.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,19 +8,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.prplhd.weather.dto.view.LocationSearchResultViewDto;
 import ru.prplhd.weather.service.LocationSearchService;
-import ru.prplhd.weather.service.UserLocationService;
 
 import java.util.List;
 
 @Controller
 @RequestMapping("/search-results")
+@RequiredArgsConstructor
 public class LocationSearchController {
 
     private final LocationSearchService locationSearchService;
-
-    public LocationSearchController(LocationSearchService locationSearchService, UserLocationService userLocationService) {
-        this.locationSearchService = locationSearchService;
-    }
 
     @GetMapping()
     public String searchLocationsPage(@RequestParam(name = "name", required = false) String name,

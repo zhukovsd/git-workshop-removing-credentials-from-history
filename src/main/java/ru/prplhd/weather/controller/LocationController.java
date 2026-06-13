@@ -1,5 +1,6 @@
 package ru.prplhd.weather.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ru.prplhd.weather.dto.auth.AuthenticatedUserDto;
@@ -8,13 +9,10 @@ import ru.prplhd.weather.service.UserLocationService;
 
 @Controller
 @RequestMapping("/locations")
+@RequiredArgsConstructor
 public class LocationController {
 
     private final UserLocationService userLocationService;
-
-    public LocationController(UserLocationService userLocationService) {
-        this.userLocationService = userLocationService;
-    }
 
     @PostMapping()
     public String addLocation(@RequestAttribute("authenticatedUserDto") AuthenticatedUserDto userDto,

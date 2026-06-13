@@ -1,5 +1,6 @@
 package ru.prplhd.weather.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.prplhd.weather.dto.auth.AuthenticatedUserDto;
@@ -16,23 +17,13 @@ import java.util.UUID;
 
 @Service
 @Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class SessionService {
 
     private final Clock clock;
     private final Duration sessionTtl;
     private final SessionRepository sessionRepository;
     private final AuthenticatedUserMapper authenticatedUserMapper;
-
-
-    public SessionService(Clock clock,
-                          Duration sessionTtl,
-                          SessionRepository sessionRepository, AuthenticatedUserMapper authenticatedUserMapper) {
-
-        this.clock = clock;
-        this.sessionTtl = sessionTtl;
-        this.sessionRepository = sessionRepository;
-        this.authenticatedUserMapper = authenticatedUserMapper;
-    }
 
     @Transactional
     public UUID createSession(UserEntity userEntity) {

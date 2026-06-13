@@ -1,5 +1,6 @@
 package ru.prplhd.weather.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,23 +17,13 @@ import java.util.UUID;
 
 @Service
 @Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class AuthService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final ConstraintViolationHandler constraintViolationHandler;
     private final SessionService sessionService;
-
-    public AuthService(UserRepository userRepository,
-                       PasswordEncoder passwordEncoder,
-                       ConstraintViolationHandler constraintViolationHandler,
-                       SessionService sessionService) {
-
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-        this.constraintViolationHandler = constraintViolationHandler;
-        this.sessionService = sessionService;
-    }
 
     @Transactional
     public void signUp(SignUpDto signUpDto) {

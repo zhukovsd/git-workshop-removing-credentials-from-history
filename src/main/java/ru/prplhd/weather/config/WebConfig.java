@@ -1,6 +1,6 @@
 package ru.prplhd.weather.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -17,16 +17,11 @@ import ru.prplhd.weather.interceptor.AuthInterceptor;
 @ComponentScan("ru.prplhd.weather.interceptor")
 @ComponentScan("ru.prplhd.weather.controller")
 @EnableWebMvc
+@RequiredArgsConstructor
 public class WebConfig implements WebMvcConfigurer {
 
     private final ApplicationContext applicationContext;
     private final AuthInterceptor authInterceptor;
-
-    @Autowired
-    public WebConfig(ApplicationContext applicationContext, AuthInterceptor authInterceptor) {
-        this.applicationContext = applicationContext;
-        this.authInterceptor = authInterceptor;
-    }
 
     @Bean
     public SpringResourceTemplateResolver getTemplateResolver() {

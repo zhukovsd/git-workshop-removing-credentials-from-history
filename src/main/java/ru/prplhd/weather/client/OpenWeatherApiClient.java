@@ -1,7 +1,8 @@
 package ru.prplhd.weather.client;
 
-import ru.prplhd.weather.dto.openweather.geocoding.LocationResponseDto;
+import lombok.RequiredArgsConstructor;
 import ru.prplhd.weather.dto.openweather.currentweather.WeatherResponseDto;
+import ru.prplhd.weather.dto.openweather.geocoding.LocationResponseDto;
 import ru.prplhd.weather.exception.openweather.OpenWeatherApiException;
 import tools.jackson.databind.json.JsonMapper;
 
@@ -16,6 +17,7 @@ import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.List;
 
+@RequiredArgsConstructor
 public class OpenWeatherApiClient implements WeatherApiClient{
 
     private static final String GEOCODING_URL_TEMPLATE =
@@ -30,19 +32,6 @@ public class OpenWeatherApiClient implements WeatherApiClient{
     private final String baseUrl;
     private final int limit;
     private final String apiKey;
-
-    public OpenWeatherApiClient(
-            HttpClient httpClient,
-            JsonMapper jsonMapper,
-            String baseUrl, int limit,
-            String apiKey
-    ) {
-        this.httpClient = httpClient;
-        this.jsonMapper = jsonMapper;
-        this.baseUrl = baseUrl;
-        this.limit = limit;
-        this.apiKey = apiKey;
-    }
 
     @Override
     public List<LocationResponseDto> findLocationsByName(String location) {

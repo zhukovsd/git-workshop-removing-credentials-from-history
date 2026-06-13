@@ -2,6 +2,7 @@ package ru.prplhd.weather.interceptor;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import ru.prplhd.weather.dto.auth.AuthenticatedUserDto;
@@ -11,13 +12,10 @@ import java.io.IOException;
 import java.util.Optional;
 
 @Component
+@RequiredArgsConstructor
 public class AuthInterceptor implements HandlerInterceptor {
 
     private final AuthenticatedUserProvider authenticatedUserProvider;
-
-    public AuthInterceptor(AuthenticatedUserProvider authenticatedUserProvider) {
-        this.authenticatedUserProvider = authenticatedUserProvider;
-    }
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {

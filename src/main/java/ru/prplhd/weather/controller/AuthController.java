@@ -3,6 +3,7 @@ package ru.prplhd.weather.controller;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,17 +23,12 @@ import java.util.UUID;
 
 @Controller
 @RequestMapping("/auth")
+@RequiredArgsConstructor
 public class AuthController {
 
     private final AuthService authService;
     private final SignUpDtoValidator signUpDtoValidator;
     private final SessionCookieManager sessionCookieManager;
-
-    public AuthController(AuthService authService, SignUpDtoValidator signUpDtoValidator, SessionCookieManager sessionCookieManager) {
-        this.authService = authService;
-        this.signUpDtoValidator = signUpDtoValidator;
-        this.sessionCookieManager = sessionCookieManager;
-    }
 
     @GetMapping("/sign-in")
     public String signInPage(@ModelAttribute("signInDto") SignInDto signUpDto) {

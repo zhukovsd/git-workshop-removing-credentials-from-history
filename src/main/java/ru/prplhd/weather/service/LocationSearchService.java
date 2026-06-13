@@ -1,5 +1,6 @@
 package ru.prplhd.weather.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.prplhd.weather.client.WeatherApiClient;
@@ -12,17 +13,11 @@ import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class LocationSearchService {
 
     private final WeatherApiClient weatherApiClient;
     private final LocationSearchResultViewMapper locationSearchResultViewMapper;
-
-    public LocationSearchService(WeatherApiClient weatherApiClient,
-                                 LocationSearchResultViewMapper locationSearchResultViewMapper
-    ) {
-        this.weatherApiClient = weatherApiClient;
-        this.locationSearchResultViewMapper = locationSearchResultViewMapper;
-    }
 
     public List<LocationSearchResultViewDto> searchByName(String name) {
         List<LocationResponseDto> locations = weatherApiClient.findLocationsByName(name);

@@ -1,5 +1,6 @@
 package ru.prplhd.weather.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.prplhd.weather.client.WeatherApiClient;
@@ -26,6 +27,7 @@ import java.util.concurrent.ExecutorService;
 
 @Service
 @Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class UserLocationService {
 
     private final LocationRepository locationRepository;
@@ -36,19 +38,6 @@ public class UserLocationService {
 
     private final LocationWeatherViewMapper locationWeatherViewMapper;
     private final LocationMapper locationMapper;
-
-    public UserLocationService(
-            LocationRepository locationRepository, UserRepository userRepository,
-            WeatherApiClient weatherApiClient, ExecutorService weatherApiExecutor,
-            LocationWeatherViewMapper locationWeatherViewMapper, LocationMapper locationMapper
-    ) {
-        this.locationRepository = locationRepository;
-        this.userRepository = userRepository;
-        this.weatherApiClient = weatherApiClient;
-        this.weatherApiExecutor = weatherApiExecutor;
-        this.locationWeatherViewMapper = locationWeatherViewMapper;
-        this.locationMapper = locationMapper;
-    }
 
     public List<LocationWeatherViewDto> findUserLocationsWithCurrentWeather(Long userId) {
         List<LocationEntity> userLocations = locationRepository.findAllByUser_Id(userId);

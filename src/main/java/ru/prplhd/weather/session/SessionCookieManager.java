@@ -3,6 +3,7 @@ package ru.prplhd.weather.session;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;
@@ -10,15 +11,12 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Component
+@RequiredArgsConstructor
 public class SessionCookieManager {
 
     private static final String SESSION_COOKIE_NAME = "SESSION";
 
     private final Duration sessionTtl;
-
-    public SessionCookieManager(Duration sessionTtl) {
-        this.sessionTtl = sessionTtl;
-    }
 
     public void addSessionCookie(UUID sessionId, HttpServletResponse response) {
         Cookie cookie = new Cookie(SESSION_COOKIE_NAME, sessionId.toString());

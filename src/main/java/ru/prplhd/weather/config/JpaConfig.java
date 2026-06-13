@@ -1,5 +1,6 @@
 package ru.prplhd.weather.config;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
@@ -19,6 +20,7 @@ import java.util.Properties;
 @PropertySource("classpath:app.properties")
 @EnableTransactionManagement
 @EnableJpaRepositories("ru.prplhd.weather.repository")
+@RequiredArgsConstructor
 public class JpaConfig {
 
     private static final String[] HIBERNATE_PROPERTY_NAMES = {
@@ -31,11 +33,6 @@ public class JpaConfig {
 
     private final Environment env;
     private final DataSource dataSource;
-
-    public JpaConfig(Environment env, DataSource dataSource) {
-        this.env = env;
-        this.dataSource = dataSource;
-    }
 
     @Bean
     @DependsOn("liquibase")

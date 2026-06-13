@@ -1,5 +1,6 @@
 package ru.prplhd.weather.validation;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -9,13 +10,10 @@ import ru.prplhd.weather.repository.UserRepository;
 import java.util.Objects;
 
 @Component
+@RequiredArgsConstructor
 public class SignUpDtoValidator implements Validator  {
 
     private final UserRepository userRepository;
-
-    public SignUpDtoValidator(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     @Override
     public boolean supports(Class<?> clazz) {
