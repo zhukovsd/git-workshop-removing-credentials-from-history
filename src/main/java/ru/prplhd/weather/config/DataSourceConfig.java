@@ -6,14 +6,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 
-import javax.sql.DataSource;
-
 @Configuration
 @PropertySource("classpath:app.properties")
 public class DataSourceConfig {
 
-    @Bean
-    public DataSource dataSource(Environment env) {
+    @Bean(destroyMethod = "close")
+    public HikariDataSource dataSource(Environment env) {
         HikariDataSource ds = new HikariDataSource();
 
         String baseUrl = env.getRequiredProperty("db.url");
@@ -25,19 +23,19 @@ public class DataSourceConfig {
         ds.setPassword(env.getRequiredProperty("db.password"));
         ds.setDriverClassName(env.getRequiredProperty("db.driver"));
 
-        int maxPoolSize = Integer.parseInt(env.getRequiredProperty("db.pool.maximum-pool-size"));
+        int maxPoolSize = env.getRequiredProperty("db.pool.maximum-pool-size", Integer.class);
         ds.setMaximumPoolSize(maxPoolSize);
 
-        int minIdle = Integer.parseInt(env.getRequiredProperty("db.pool.minimum-idle"));
+        int minIdle = env.getRequiredProperty("db.pool.minimum-idle", Integer.class);
         ds.setMinimumIdle(minIdle);
 
-        long connTimeout = Long.parseLong(env.getRequiredProperty("db.pool.connection-timeout-ms"));
+        long connTimeout = env.getRequiredProperty("db.pool.connection-timeout-ms", Long.class);
         ds.setConnectionTimeout(connTimeout);
 
-        long idleTimeout = Long.parseLong(env.getRequiredProperty("db.pool.idle-timeout-ms"));
+        long idleTimeout = env.getRequiredProperty("db.pool.idle-timeout-ms", Long.class);
         ds.setIdleTimeout(idleTimeout);
 
-        long maxLifetime = Long.parseLong(env.getRequiredProperty("db.pool.max-lifetime-ms"));
+        long maxLifetime = env.getRequiredProperty("db.pool.max-lifetime-ms", Long.class);
         ds.setMaxLifetime(maxLifetime);
 
         return ds;
