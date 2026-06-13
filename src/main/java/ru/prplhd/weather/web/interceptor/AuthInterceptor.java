@@ -4,7 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
-import ru.prplhd.weather.dto.AuthenticatedUser;
+import ru.prplhd.weather.dto.auth.AuthenticatedUserDto;
 import ru.prplhd.weather.web.auth.AuthenticatedUserProvider;
 
 import java.io.IOException;
@@ -21,14 +21,14 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
-        Optional<AuthenticatedUser> userOpt = authenticatedUserProvider.findAuthenticatedUser(request, response);
+        Optional<AuthenticatedUserDto> userOpt = authenticatedUserProvider.findAuthenticatedUser(request, response);
 
         if (userOpt.isEmpty()) {
             response.sendRedirect(request.getContextPath() + "/auth/sign-in");
             return false;
         }
 
-        request.setAttribute("authenticatedUser", userOpt.get());
+        request.setAttribute("authenticatedUserDto", userOpt.get());
         return true;
     }
 

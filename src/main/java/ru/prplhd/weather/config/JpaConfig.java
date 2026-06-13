@@ -23,8 +23,8 @@ public class JpaConfig {
 
     private static final String[] HIBERNATE_PROPERTY_NAMES = {
             "hibernate.dialect",
-            "hibernate.show_sql",
-            "hibernate.default_schema",
+            "hibernate.show-sql",
+            "hibernate.default-schema",
             "hibernate.hbm2ddl.auto"
     };
     private static final String PACKAGE_TO_SCAN = "ru.prplhd.weather.persistence.entity";

@@ -7,7 +7,10 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import ru.prplhd.weather.client.OpenWeatherApiClient;
+import tools.jackson.databind.json.JsonMapper;
 
+import java.net.http.HttpClient;
 import java.time.Clock;
 import java.time.Duration;
 
@@ -34,5 +37,31 @@ public class AppConfig {
         long ttlHours = env.getRequiredProperty("app.session.ttl-hours", Long.class);
 
         return Duration.ofHours(ttlHours);
+    }
+
+    @Bean
+    public JsonMapper jsonMapper() {
+        return JsonMapper.builder().build();
+    }
+
+    @Bean
+    public HttpClient httpClient() {
+        return HttpClient.newBuilder()
+                .connectTimeout(Duration.ofSeconds(10))
+                .build();
+    }
+
+    @Bean
+    public OpenWeatherApiClient openWeatherApiClient(
+            HttpClient httpClient,
+            JsonMapper jsonMapper,
+            Environment env
+    ) {
+        return new OpenWeatherApiClient(
+                httpClient,
+                jsonMapper,
+                env.getRequiredProperty("openweather.base-url"),
+                env.getRequiredProperty("openweather.api-key")
+        );
     }
 }

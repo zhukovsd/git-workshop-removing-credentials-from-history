@@ -3,7 +3,7 @@ package ru.prplhd.weather.web.auth;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
-import ru.prplhd.weather.dto.AuthenticatedUser;
+import ru.prplhd.weather.dto.auth.AuthenticatedUserDto;
 import ru.prplhd.weather.service.SessionService;
 
 import java.util.Optional;
@@ -20,7 +20,7 @@ public class AuthenticatedUserProvider {
         this.sessionService = sessionService;
     }
 
-    public Optional<AuthenticatedUser> findAuthenticatedUser(HttpServletRequest request, HttpServletResponse response) {
+    public Optional<AuthenticatedUserDto> findAuthenticatedUser(HttpServletRequest request, HttpServletResponse response) {
         Optional<UUID> sessionIdOpt = sessionCookieManager.findSessionId(request);
 
         if (sessionIdOpt.isEmpty()) {
@@ -30,7 +30,7 @@ public class AuthenticatedUserProvider {
 
         UUID sessionId = sessionIdOpt.get();
 
-        Optional<AuthenticatedUser> authenticatedUserOpt = sessionService.resolveUserBySessionId(sessionId);
+        Optional<AuthenticatedUserDto> authenticatedUserOpt = sessionService.resolveUserBySessionId(sessionId);
 
         if (authenticatedUserOpt.isEmpty()) {
             sessionCookieManager.deleteSessionCookie(response);

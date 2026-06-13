@@ -1,4 +1,4 @@
-package ru.prplhd.weather.dto;
+package ru.prplhd.weather.dto.auth;
 
 import jakarta.validation.constraints.NotBlank;
 

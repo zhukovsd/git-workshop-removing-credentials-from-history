@@ -38,8 +38,22 @@ dependencies {
     implementation("org.liquibase:liquibase-core:5.0.2")
     implementation("org.hibernate.orm:hibernate-core:7.3.2.Final")
     implementation("org.hibernate.validator:hibernate-validator:8.0.3.Final")
+
+    implementation("tools.jackson.core:jackson-databind:3.1.3")
 }
 
 tasks.test {
     useJUnitPlatform()
+}
+
+tasks.register<Test>("authTest") {
+    group = "verification"
+    description = "Runs tests tagged \"Auth\""
+
+    useJUnitPlatform {
+        includeTags("auth")
+    }
+
+    testClassesDirs = sourceSets["test"].output.classesDirs
+    classpath = sourceSets["test"].runtimeClasspath
 }

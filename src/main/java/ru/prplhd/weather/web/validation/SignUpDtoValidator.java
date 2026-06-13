@@ -3,7 +3,7 @@ package ru.prplhd.weather.web.validation;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import ru.prplhd.weather.dto.SignUpDto;
+import ru.prplhd.weather.dto.auth.SignUpDto;
 import ru.prplhd.weather.persistence.repository.UserRepository;
 
 import java.util.Objects;

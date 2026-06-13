@@ -15,14 +15,14 @@
             Weather Tracker
         </a>
 
-        <div th:if="${authenticatedUser != null}" class="d-flex align-items-center">
-            <span th:text="${authenticatedUser.login}" class="navbar-text me-3">login</span>
+        <div th:if="${authenticatedUserDto != null}" class="d-flex align-items-center">
+            <span th:text="${authenticatedUserDto.login}" class="navbar-text me-3">login</span>
             <form th:action="@{/auth/sign-out}" method="post">
                 <button type="submit" class="btn btn-outline-danger">Sign out</button>
             </form>
         </div>
 
-        <div th:if="${authenticatedUser == null}" class="d-flex align-items-center gap-2">
+        <div th:if="${authenticatedUserDto == null}" class="d-flex align-items-center gap-2">
             <a th:href="@{/auth/sign-in}" class="btn btn-outline-primary">Sign in</a>
             <a th:href="@{/auth/sign-up}" class="btn btn-outline-success">Sign up</a>
         </div>

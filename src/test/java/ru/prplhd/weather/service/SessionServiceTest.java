@@ -12,7 +12,7 @@ import ru.prplhd.weather.config.AppConfig;
 import ru.prplhd.weather.config.DataSourceConfig;
 import ru.prplhd.weather.config.JpaConfig;
 import ru.prplhd.weather.config.LiquibaseConfig;
-import ru.prplhd.weather.dto.AuthenticatedUser;
+import ru.prplhd.weather.dto.auth.AuthenticatedUserDto;
 import ru.prplhd.weather.persistence.entity.SessionEntity;
 import ru.prplhd.weather.persistence.entity.UserEntity;
 import ru.prplhd.weather.persistence.repository.SessionRepository;
@@ -84,7 +84,7 @@ public class SessionServiceTest {
         SessionEntity session = givenActiveSessionExistsInDb();
         UUID sessionId = session.getId();
 
-        Optional<AuthenticatedUser> authenticatedUserOpt = sessionService.resolveUserBySessionId(sessionId);
+        Optional<AuthenticatedUserDto> authenticatedUserOpt = sessionService.resolveUserBySessionId(sessionId);
 
         assertThat(authenticatedUserOpt).isPresent();
 
@@ -99,7 +99,7 @@ public class SessionServiceTest {
     void whenResolveUserBySessionId_withUnknownSession_thenReturnsEmpty() {
         UUID unknownSessionId = UUID.randomUUID();
 
-        Optional<AuthenticatedUser> authenticatedUserOpt = sessionService.resolveUserBySessionId(unknownSessionId);
+        Optional<AuthenticatedUserDto> authenticatedUserOpt = sessionService.resolveUserBySessionId(unknownSessionId);
 
         assertThat(authenticatedUserOpt).isEmpty();
     }
@@ -112,7 +112,7 @@ public class SessionServiceTest {
 
         assertThat(sessionRepository.findById(expiredSessionId)).isPresent();
 
-        Optional<AuthenticatedUser> authenticatedUserOpt = sessionService.resolveUserBySessionId(expiredSessionId);
+        Optional<AuthenticatedUserDto> authenticatedUserOpt = sessionService.resolveUserBySessionId(expiredSessionId);
 
         assertThat(authenticatedUserOpt).isEmpty();
 

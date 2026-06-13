@@ -2,7 +2,7 @@ package ru.prplhd.weather.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.prplhd.weather.dto.AuthenticatedUser;
+import ru.prplhd.weather.dto.auth.AuthenticatedUserDto;
 import ru.prplhd.weather.persistence.entity.SessionEntity;
 import ru.prplhd.weather.persistence.entity.UserEntity;
 import ru.prplhd.weather.persistence.repository.SessionRepository;
@@ -49,7 +49,7 @@ public class SessionService {
     }
 
     @Transactional
-    public Optional<AuthenticatedUser> resolveUserBySessionId(UUID sessionId) {
+    public Optional<AuthenticatedUserDto> resolveUserBySessionId(UUID sessionId) {
         Optional<SessionEntity> sessionEntityOpt = sessionRepository.findBySessionIdWithUser(sessionId);
 
         if (sessionEntityOpt.isEmpty()) {
@@ -68,12 +68,12 @@ public class SessionService {
 
         UserEntity userEntity = sessionEntity.getUser();
 
-        AuthenticatedUser authenticatedUser = new AuthenticatedUser(
+        AuthenticatedUserDto authenticatedUserDto = new AuthenticatedUserDto(
                 userEntity.getId(),
                 userEntity.getLogin()
         );
 
-        return Optional.of(authenticatedUser);
+        return Optional.of(authenticatedUserDto);
     }
 
     @Transactional
