@@ -3,6 +3,7 @@ package ru.prplhd.weather.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.prplhd.weather.dto.auth.AuthenticatedUserDto;
+import ru.prplhd.weather.mapper.AuthenticatedUserMapper;
 import ru.prplhd.weather.persistence.entity.SessionEntity;
 import ru.prplhd.weather.persistence.entity.UserEntity;
 import ru.prplhd.weather.persistence.repository.SessionRepository;
@@ -20,15 +21,17 @@ public class SessionService {
     private final Clock clock;
     private final Duration sessionTtl;
     private final SessionRepository sessionRepository;
+    private final AuthenticatedUserMapper authenticatedUserMapper;
 
 
     public SessionService(Clock clock,
                           Duration sessionTtl,
-                          SessionRepository sessionRepository) {
+                          SessionRepository sessionRepository, AuthenticatedUserMapper authenticatedUserMapper) {
 
         this.clock = clock;
         this.sessionTtl = sessionTtl;
         this.sessionRepository = sessionRepository;
+        this.authenticatedUserMapper = authenticatedUserMapper;
     }
 
     @Transactional
@@ -68,10 +71,7 @@ public class SessionService {
 
         UserEntity userEntity = sessionEntity.getUser();
 
-        AuthenticatedUserDto authenticatedUserDto = new AuthenticatedUserDto(
-                userEntity.getId(),
-                userEntity.getLogin()
-        );
+        AuthenticatedUserDto authenticatedUserDto = authenticatedUserMapper.toAuthenticatedUserDto(userEntity);
 
         return Optional.of(authenticatedUserDto);
     }
