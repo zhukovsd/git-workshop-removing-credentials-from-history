@@ -20,7 +20,7 @@ public interface SessionRepository extends JpaRepository<SessionEntity, UUID> {
            """)
     Optional<SessionEntity> findBySessionIdWithUser(@Param("sessionId") UUID sessionId);
 
-    @Modifying
+    @Modifying(clearAutomatically = true)
     @Query("""
            DELETE
            FROM SessionEntity s
