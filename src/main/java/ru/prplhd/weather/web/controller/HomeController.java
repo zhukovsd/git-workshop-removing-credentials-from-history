@@ -33,7 +33,7 @@ public class HomeController {
         return "index";
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/locations/{id}")
     public String deleteLocation(@RequestAttribute("authenticatedUserDto") AuthenticatedUserDto userDto,
                                  @PathVariable("id") Long locationId
     ) {
