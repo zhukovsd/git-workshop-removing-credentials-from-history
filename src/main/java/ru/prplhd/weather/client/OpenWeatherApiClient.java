@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import ru.prplhd.weather.dto.openweather.currentweather.WeatherResponseDto;
 import ru.prplhd.weather.dto.openweather.geocoding.LocationResponseDto;
 import ru.prplhd.weather.exception.openweather.OpenWeatherApiException;
+import tools.jackson.core.JacksonException;
 import tools.jackson.databind.json.JsonMapper;
 
 import java.io.IOException;
@@ -108,7 +109,13 @@ public class OpenWeatherApiClient implements WeatherApiClient{
     }
 
     private List<LocationResponseDto> parseLocations(String responseBody) {
-        LocationResponseDto[] locations = jsonMapper.readValue(responseBody, LocationResponseDto[].class);
+        LocationResponseDto[] locations;
+
+        try {
+            locations = jsonMapper.readValue(responseBody, LocationResponseDto[].class);
+        } catch (JacksonException e) {
+            throw new OpenWeatherApiException("Failed to parse locations response", e);
+        }
 
         return List.of(locations);
     }

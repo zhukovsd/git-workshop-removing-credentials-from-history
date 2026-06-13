@@ -199,4 +199,26 @@ public class OpenWeatherApiClientTest {
         assertThat(result.weather().getFirst().description()).isEqualTo("overcast clouds");
         assertThat(result.weather().getFirst().icon()).isEqualTo("04d");
     }
+
+    @Test
+    @DisplayName("Throws OpenWeatherApiException when OpenWeather returns invalid JSON")
+    void whenFindLocationsByName_withInvalidJsonResponse_thenThrowsOpenWeatherApiException() {
+        stubFor(get(urlPathEqualTo("/geo/1.0/direct"))
+                .withQueryParam("q", equalTo("London"))
+                .withQueryParam("limit", equalTo(locationSearchLimit))
+                .withQueryParam("appid", equalTo(apiKey))
+                .willReturn(aResponse()
+                        .withStatus(200)
+                        .withHeader("Content-Type", "application/json")
+                        .withBody(
+                                """
+                                [Wr0ng!~~~Answer
+                                """
+                        )
+                )
+        );
+
+        assertThatThrownBy(() -> client.findLocationsByName("London"))
+                .isInstanceOf(OpenWeatherApiException.class);
+    }
 }
