@@ -40,6 +40,8 @@ dependencies {
     implementation("org.hibernate.validator:hibernate-validator:8.0.3.Final")
 
     implementation("tools.jackson.core:jackson-databind:3.1.3")
+    implementation("org.mapstruct:mapstruct:1.6.3")
+    annotationProcessor("org.mapstruct:mapstruct-processor:1.6.3")
 }
 
 tasks.test {

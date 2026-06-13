@@ -5,7 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.prplhd.weather.dto.openweather.LocationResponseDto;
+import ru.prplhd.weather.dto.openweather.geocoding.LocationResponseDto;
 import ru.prplhd.weather.service.LocationSearchService;
 
 import java.util.List;
@@ -22,8 +22,8 @@ public class LocationSearchController {
 
     @GetMapping()
     public String searchLocationsPage(@RequestParam(name = "name", required = false) String name,
-                                      Model model) {
-
+                                      Model model
+    ) {
         model.addAttribute("name", name);
 
         if (name == null || name.isBlank()) {

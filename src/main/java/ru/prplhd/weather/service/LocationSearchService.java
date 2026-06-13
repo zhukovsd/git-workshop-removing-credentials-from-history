@@ -2,7 +2,7 @@ package ru.prplhd.weather.service;
 
 import org.springframework.stereotype.Service;
 import ru.prplhd.weather.client.OpenWeatherApiClient;
-import ru.prplhd.weather.dto.openweather.LocationResponseDto;
+import ru.prplhd.weather.dto.openweather.geocoding.LocationResponseDto;
 
 import java.util.List;
 

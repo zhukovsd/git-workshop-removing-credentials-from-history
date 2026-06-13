@@ -1,4 +1,4 @@
-package ru.prplhd.weather.dto.openweather;
+package ru.prplhd.weather.dto.openweather.geocoding;
 
 import java.math.BigDecimal;
 

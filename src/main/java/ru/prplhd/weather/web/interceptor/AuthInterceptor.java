@@ -31,5 +31,4 @@ public class AuthInterceptor implements HandlerInterceptor {
         request.setAttribute("authenticatedUserDto", userOpt.get());
         return true;
     }
-
 }

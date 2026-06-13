@@ -1,10 +1,12 @@
 package ru.prplhd.weather.client;
 
-import ru.prplhd.weather.dto.openweather.LocationResponseDto;
+import ru.prplhd.weather.dto.openweather.geocoding.LocationResponseDto;
+import ru.prplhd.weather.dto.openweather.currentweather.WeatherResponseDto;
 import ru.prplhd.weather.exception.OpenWeatherApiException;
 import tools.jackson.databind.json.JsonMapper;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URLEncoder;
 import java.net.http.HttpClient;
@@ -20,6 +22,9 @@ public class OpenWeatherApiClient {
             "%s/geo/1.0/direct?q=%s&limit=%d&appid=%s";
 
     private static final int GEOCODING_LIMIT = 4;
+
+    private static final String CURRENT_WEATHER_URL_TEMPLATE =
+            "%s/data/2.5/weather?lat=%s&lon=%s&appid=%s&units=metric";
 
     private final HttpClient httpClient;
     private final JsonMapper jsonMapper;
@@ -50,6 +55,18 @@ public class OpenWeatherApiClient {
         return parseLocations(responseBody);
     }
 
+    public WeatherResponseDto getLocationCurrentWeather(BigDecimal latitude, BigDecimal longitude) {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(buildCurrentWeatherUri(latitude, longitude))
+                .timeout(Duration.ofSeconds(10))
+                .GET()
+                .build();
+
+        String responseBody = sendRequest(request);
+
+        return jsonMapper.readValue(responseBody, WeatherResponseDto.class);
+    }
+
     private URI buildGeocodingUri(String query) {
         String encodedQuery = URLEncoder.encode(query, StandardCharsets.UTF_8);
 
@@ -57,6 +74,17 @@ public class OpenWeatherApiClient {
                 baseUrl,
                 encodedQuery,
                 GEOCODING_LIMIT,
+                apiKey
+        );
+
+        return URI.create(urlString);
+    }
+
+    private URI buildCurrentWeatherUri(BigDecimal latitude, BigDecimal longitude) {
+        String urlString = CURRENT_WEATHER_URL_TEMPLATE.formatted(
+                baseUrl,
+                latitude.toPlainString(),
+                longitude.toPlainString(),
                 apiKey
         );
 

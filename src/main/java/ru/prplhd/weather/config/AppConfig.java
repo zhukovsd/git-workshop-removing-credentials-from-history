@@ -8,6 +8,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import ru.prplhd.weather.client.OpenWeatherApiClient;
+import tools.jackson.databind.DeserializationFeature;
 import tools.jackson.databind.json.JsonMapper;
 
 import java.net.http.HttpClient;
@@ -18,7 +19,8 @@ import java.time.Duration;
 @PropertySource("classpath:app.properties")
 @ComponentScan({
         "ru.prplhd.weather.service",
-        "ru.prplhd.weather.persistence.util"
+        "ru.prplhd.weather.persistence.util",
+        "ru.prplhd.weather.mapper"
 })
 public class AppConfig {
 
@@ -41,7 +43,9 @@ public class AppConfig {
 
     @Bean
     public JsonMapper jsonMapper() {
-        return JsonMapper.builder().build();
+        return JsonMapper.builder()
+                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+                .build();
     }
 
     @Bean
