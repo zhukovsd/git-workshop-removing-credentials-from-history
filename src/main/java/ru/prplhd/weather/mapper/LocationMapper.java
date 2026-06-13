@@ -5,6 +5,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import ru.prplhd.weather.dto.location.AddLocationDto;
 import ru.prplhd.weather.entity.LocationEntity;
+import ru.prplhd.weather.entity.UserEntity;
 import ru.prplhd.weather.util.CoordinateNormalizer;
 
 import java.math.BigDecimal;
@@ -13,10 +14,9 @@ import java.math.BigDecimal;
 public interface LocationMapper {
 
     @Mapping(target = "name", qualifiedByName = "normalizeName")
-    @Mapping(target = "user", ignore = true)
     @Mapping(target = "latitude", qualifiedByName = "normalizeCoordinate")
     @Mapping(target = "longitude", qualifiedByName = "normalizeCoordinate")
-    LocationEntity toEntity(AddLocationDto dto);
+    LocationEntity toEntity(AddLocationDto dto, UserEntity user);
 
     @Named("normalizeName")
     default String normalizeName(String name) {

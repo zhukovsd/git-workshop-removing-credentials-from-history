@@ -26,7 +26,6 @@ public class LocationEntity {
     @Column(name = "name", nullable = false, updatable = false)
     private String name;
 
-    @Setter
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false, updatable = false)
     private UserEntity user;

@@ -89,10 +89,8 @@ public class UserLocationService {
             throw new LocationAlreadyExistsException("Location already exists for current user");
         }
 
-        LocationEntity locationEntity = locationMapper.toEntity(addLocationDto);
-
         UserEntity userReference = userRepository.getReferenceById(userId);
-        locationEntity.setUser(userReference);
+        LocationEntity locationEntity = locationMapper.toEntity(addLocationDto, userReference);
 
         locationRepository.save(locationEntity);
     }
