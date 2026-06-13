@@ -43,6 +43,8 @@ dependencies {
     implementation("tools.jackson.core:jackson-databind:3.1.3")
     implementation("org.mapstruct:mapstruct:1.6.3")
     annotationProcessor("org.mapstruct:mapstruct-processor:1.6.3")
+
+    implementation("com.github.ben-manes.caffeine:caffeine:3.2.4")
 }
 
 tasks.test {
