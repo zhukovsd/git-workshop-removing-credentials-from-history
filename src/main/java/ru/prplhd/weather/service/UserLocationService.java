@@ -7,18 +7,18 @@ import ru.prplhd.weather.client.WeatherApiClient;
 import ru.prplhd.weather.dto.location.AddLocationDto;
 import ru.prplhd.weather.dto.openweather.currentweather.WeatherResponseDto;
 import ru.prplhd.weather.dto.view.LocationWeatherViewDto;
+import ru.prplhd.weather.entity.LocationEntity;
+import ru.prplhd.weather.entity.UserEntity;
 import ru.prplhd.weather.exception.location.LocationAlreadyExistsException;
 import ru.prplhd.weather.exception.location.LocationNotFoundException;
 import ru.prplhd.weather.exception.openweather.OpenWeatherApiException;
 import ru.prplhd.weather.mapper.LocationMapper;
 import ru.prplhd.weather.mapper.LocationWeatherViewMapper;
-import ru.prplhd.weather.entity.LocationEntity;
-import ru.prplhd.weather.entity.UserEntity;
 import ru.prplhd.weather.repository.LocationRepository;
 import ru.prplhd.weather.repository.UserRepository;
+import ru.prplhd.weather.util.CoordinateNormalizer;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -81,8 +81,8 @@ public class UserLocationService {
     public void saveLocation(Long userId, AddLocationDto addLocationDto) {
         boolean locationAlreadyExists = locationRepository.existsByUser_IdAndLatitudeAndLongitude(
                 userId,
-                addLocationDto.latitude().setScale(6, RoundingMode.HALF_UP),
-                addLocationDto.longitude().setScale(6, RoundingMode.HALF_UP)
+                CoordinateNormalizer.normalize(addLocationDto.latitude()),
+                CoordinateNormalizer.normalize(addLocationDto.longitude())
         );
 
         if (locationAlreadyExists) {

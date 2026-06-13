@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import ru.prplhd.weather.dto.openweather.currentweather.WeatherResponseDto;
 import ru.prplhd.weather.dto.openweather.geocoding.LocationResponseDto;
+import ru.prplhd.weather.util.CoordinateNormalizer;
 
 import java.math.BigDecimal;
 import java.time.Duration;
@@ -50,11 +51,17 @@ public class CachingWeatherApiClient implements WeatherApiClient {
 
     @Override
     public WeatherResponseDto getLocationCurrentWeather(BigDecimal latitude, BigDecimal longitude) {
-        WeatherCacheKey weatherCacheKey = new WeatherCacheKey(latitude, longitude);
+        BigDecimal normalizedLatitude = CoordinateNormalizer.normalize(latitude);
+        BigDecimal normalizedLongitude = CoordinateNormalizer.normalize(longitude);
+
+        WeatherCacheKey weatherCacheKey = new WeatherCacheKey(
+                normalizedLatitude,
+                normalizedLongitude
+        );
 
         return weatherCache.get(
                 weatherCacheKey,
-                ignored -> delegate.getLocationCurrentWeather(latitude, longitude)
+                ignored -> delegate.getLocationCurrentWeather(normalizedLatitude, normalizedLongitude)
         );
     }
 
