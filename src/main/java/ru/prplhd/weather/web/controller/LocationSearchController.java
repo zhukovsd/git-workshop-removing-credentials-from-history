@@ -41,7 +41,7 @@ public class LocationSearchController {
     }
 
     @PostMapping()
-    public String addLocation(@RequestAttribute(name = "authenticatedUserDto", required = false) AuthenticatedUserDto userDto,
+    public String addLocation(@RequestAttribute("authenticatedUserDto") AuthenticatedUserDto userDto,
                               @ModelAttribute AddLocationDto addLocationDto
     ) {
         userLocationService.saveLocation(userDto.id(), addLocationDto);

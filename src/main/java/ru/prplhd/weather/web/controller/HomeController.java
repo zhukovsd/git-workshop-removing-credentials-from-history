@@ -20,7 +20,7 @@ public class HomeController {
     }
 
     @GetMapping()
-    public String home(@RequestAttribute(name = "authenticatedUserDto", required = false) AuthenticatedUserDto userDto,
+    public String home(@RequestAttribute("authenticatedUserDto") AuthenticatedUserDto userDto,
                        Model model
     ) {
         List<LocationWeatherViewDto> locations = List.of();
@@ -34,7 +34,7 @@ public class HomeController {
     }
 
     @DeleteMapping("/{id}")
-    public String deleteLocation(@RequestAttribute(name = "authenticatedUserDto", required = false) AuthenticatedUserDto userDto,
+    public String deleteLocation(@RequestAttribute("authenticatedUserDto") AuthenticatedUserDto userDto,
                                  @PathVariable("id") Long locationId
     ) {
         userLocationService.deleteLocation(locationId, userDto.id());
