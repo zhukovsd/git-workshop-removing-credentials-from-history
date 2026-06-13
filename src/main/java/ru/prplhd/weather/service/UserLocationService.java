@@ -2,7 +2,7 @@ package ru.prplhd.weather.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.prplhd.weather.client.OpenWeatherApiClient;
+import ru.prplhd.weather.client.WeatherApiClient;
 import ru.prplhd.weather.dto.location.AddLocationDto;
 import ru.prplhd.weather.dto.openweather.currentweather.WeatherResponseDto;
 import ru.prplhd.weather.dto.view.LocationWeatherViewDto;
@@ -29,7 +29,7 @@ public class UserLocationService {
     private final LocationRepository locationRepository;
     private final UserRepository userRepository;
 
-    private final OpenWeatherApiClient openWeatherApiClient;
+    private final WeatherApiClient weatherApiClient;
     private final ExecutorService weatherApiExecutor;
 
     private final LocationWeatherViewMapper locationWeatherViewMapper;
@@ -37,12 +37,12 @@ public class UserLocationService {
 
     public UserLocationService(
             LocationRepository locationRepository, UserRepository userRepository,
-            OpenWeatherApiClient openWeatherApiClient, ExecutorService weatherApiExecutor,
+            WeatherApiClient weatherApiClient, ExecutorService weatherApiExecutor,
             LocationWeatherViewMapper locationWeatherViewMapper, LocationMapper locationMapper
     ) {
         this.locationRepository = locationRepository;
         this.userRepository = userRepository;
-        this.openWeatherApiClient = openWeatherApiClient;
+        this.weatherApiClient = weatherApiClient;
         this.weatherApiExecutor = weatherApiExecutor;
         this.locationWeatherViewMapper = locationWeatherViewMapper;
         this.locationMapper = locationMapper;
@@ -59,7 +59,7 @@ public class UserLocationService {
 
             futures.add(
                     CompletableFuture.supplyAsync(() -> {
-                                WeatherResponseDto weatherResponseDto = openWeatherApiClient.getLocationCurrentWeather(latitude, longitude);
+                                WeatherResponseDto weatherResponseDto = weatherApiClient.getLocationCurrentWeather(latitude, longitude);
 
                                 return locationWeatherViewMapper.toViewDto(
                                         userLocation,

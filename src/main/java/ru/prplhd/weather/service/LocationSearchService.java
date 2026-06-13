@@ -2,7 +2,7 @@ package ru.prplhd.weather.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.prplhd.weather.client.OpenWeatherApiClient;
+import ru.prplhd.weather.client.WeatherApiClient;
 import ru.prplhd.weather.dto.openweather.geocoding.LocationResponseDto;
 import ru.prplhd.weather.dto.view.LocationSearchResultViewDto;
 import ru.prplhd.weather.mapper.LocationSearchResultViewMapper;
@@ -14,18 +14,18 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class LocationSearchService {
 
-    private final OpenWeatherApiClient openWeatherApiClient;
+    private final WeatherApiClient weatherApiClient;
     private final LocationSearchResultViewMapper locationSearchResultViewMapper;
 
-    public LocationSearchService(OpenWeatherApiClient openWeatherApiClient,
+    public LocationSearchService(WeatherApiClient weatherApiClient,
                                  LocationSearchResultViewMapper locationSearchResultViewMapper
     ) {
-        this.openWeatherApiClient = openWeatherApiClient;
+        this.weatherApiClient = weatherApiClient;
         this.locationSearchResultViewMapper = locationSearchResultViewMapper;
     }
 
     public List<LocationSearchResultViewDto> searchByName(String name) {
-        List<LocationResponseDto> locations = openWeatherApiClient.findLocationsByName(name);
+        List<LocationResponseDto> locations = weatherApiClient.findLocationsByName(name);
 
         List<LocationSearchResultViewDto> result = new ArrayList<>();
 

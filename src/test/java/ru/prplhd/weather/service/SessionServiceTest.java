@@ -41,22 +41,22 @@ public class SessionServiceTest {
     private static final String PASSWORD = "password1337";
 
     @Autowired
-    SessionService sessionService;
+    private SessionService sessionService;
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    SessionRepository sessionRepository;
+    private SessionRepository sessionRepository;
 
     @Autowired
-    PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
-    Clock clock;
+    private Clock clock;
 
     @Autowired
-    Duration sessionTtl;
+    private Duration sessionTtl;
 
     @Test
     @DisplayName("Create session for existing user creates session in database")
