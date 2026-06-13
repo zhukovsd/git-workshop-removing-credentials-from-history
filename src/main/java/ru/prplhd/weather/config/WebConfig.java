@@ -9,7 +9,6 @@ import org.springframework.web.servlet.config.annotation.*;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 import org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring6.view.ThymeleafViewResolver;
-import ru.prplhd.weather.web.auth.AuthenticatedUserProvider;
 import ru.prplhd.weather.web.interceptor.AuthInterceptor;
 
 @Configuration
@@ -21,7 +20,7 @@ public class WebConfig implements WebMvcConfigurer {
     private final AuthInterceptor authInterceptor;
 
     @Autowired
-    public WebConfig(ApplicationContext applicationContext, AuthenticatedUserProvider authenticatedUserProvider, AuthInterceptor authInterceptor) {
+    public WebConfig(ApplicationContext applicationContext, AuthInterceptor authInterceptor) {
         this.applicationContext = applicationContext;
         this.authInterceptor = authInterceptor;
     }
