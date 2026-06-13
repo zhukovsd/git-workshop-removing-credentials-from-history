@@ -17,7 +17,6 @@ import ru.prplhd.weather.service.AuthService;
 import ru.prplhd.weather.web.auth.SessionCookieManager;
 import ru.prplhd.weather.web.validation.SignUpDtoValidator;
 
-import java.time.Duration;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -29,7 +28,7 @@ public class AuthController {
     private final SignUpDtoValidator signUpDtoValidator;
     private final SessionCookieManager sessionCookieManager;
 
-    public AuthController(AuthService authService, SignUpDtoValidator signUpDtoValidator, Duration sessionTtl, SessionCookieManager sessionCookieManager) {
+    public AuthController(AuthService authService, SignUpDtoValidator signUpDtoValidator, SessionCookieManager sessionCookieManager) {
         this.authService = authService;
         this.signUpDtoValidator = signUpDtoValidator;
         this.sessionCookieManager = sessionCookieManager;
