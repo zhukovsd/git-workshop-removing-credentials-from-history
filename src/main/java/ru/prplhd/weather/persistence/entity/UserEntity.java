@@ -19,7 +19,7 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "login", nullable = false, updatable = false, unique = true)
+    @Column(name = "login", nullable = false, updatable = false)
     private String login;
 
     @Column(name = "password_hash", nullable = false)
