@@ -103,6 +103,8 @@ public class UserLocationService {
                 if (e.getCause() instanceof OpenWeatherApiException openWeatherException) {
                     throw  openWeatherException;
                 }
+
+                throw new IllegalStateException("Unexpected error while loading weather", e.getCause());
             }
         }
 
