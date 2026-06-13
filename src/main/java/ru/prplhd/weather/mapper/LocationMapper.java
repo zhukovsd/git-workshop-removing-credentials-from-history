@@ -12,6 +12,7 @@ import java.util.Locale;
 public interface LocationMapper {
 
     @Mapping(target = "name", qualifiedByName = "normalizeName")
+    @Mapping(target = "user", ignore = true)
     LocationEntity toEntity(AddLocationDto dto);
 
     @Named("normalizeName")
