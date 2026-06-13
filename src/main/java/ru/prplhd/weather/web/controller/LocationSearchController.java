@@ -40,7 +40,7 @@ public class LocationSearchController {
         return "search-results";
     }
 
-    @PostMapping("/add-location")
+    @PostMapping()
     public String addLocation(@RequestAttribute(name = "authenticatedUserDto", required = false) AuthenticatedUserDto userDto,
                               @ModelAttribute AddLocationDto addLocationDto
     ) {
