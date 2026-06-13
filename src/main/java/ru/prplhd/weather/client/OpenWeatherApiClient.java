@@ -44,6 +44,7 @@ public class OpenWeatherApiClient implements WeatherApiClient{
         this.apiKey = apiKey;
     }
 
+    @Override
     public List<LocationResponseDto> findLocationsByName(String location) {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(buildGeocodingUri(location))
@@ -56,6 +57,7 @@ public class OpenWeatherApiClient implements WeatherApiClient{
         return parseLocations(responseBody);
     }
 
+    @Override
     public WeatherResponseDto getLocationCurrentWeather(BigDecimal latitude, BigDecimal longitude) {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(buildCurrentWeatherUri(latitude, longitude))

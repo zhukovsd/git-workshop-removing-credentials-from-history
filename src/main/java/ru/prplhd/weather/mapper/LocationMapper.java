@@ -6,8 +6,6 @@ import org.mapstruct.Named;
 import ru.prplhd.weather.dto.location.AddLocationDto;
 import ru.prplhd.weather.persistence.entity.LocationEntity;
 
-import java.util.Locale;
-
 @Mapper(componentModel = "spring")
 public interface LocationMapper {
 
@@ -21,8 +19,6 @@ public interface LocationMapper {
             return name;
         }
 
-        String trimmed = name.trim().toLowerCase(Locale.ROOT);
-
-        return trimmed.substring(0, 1).toUpperCase(Locale.ROOT) + trimmed.substring(1);
+        return name.trim();
     }
 }
