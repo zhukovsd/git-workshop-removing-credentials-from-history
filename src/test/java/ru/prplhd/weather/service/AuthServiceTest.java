@@ -81,7 +81,7 @@ class AuthServiceTest {
     @Test
     @DisplayName("Sign up with duplicate login throws UserAlreadyExistsException")
     void whenSignUp_withExistingLogin_thenThrowsException() {
-        userRepository.save(new UserEntity(VALID_SIGN_UP_DTO.login(), "randomPass"));
+        userRepository.save(new UserEntity(VALID_SIGN_UP_DTO.login(), passwordEncoder.encode(VALID_PASSWORD)));
 
         assertThatThrownBy(() -> authService.signUp(VALID_SIGN_UP_DTO))
                 .isInstanceOf(LoginAlreadyExistsException.class);
