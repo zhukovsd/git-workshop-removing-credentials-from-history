@@ -58,6 +58,14 @@
             </form>
         </div>
 
+        <div th:if="${errorMessages}" class="glass-panel mb-4">
+            <ul class="mb-0">
+                <li th:each="error : ${errorMessages}"
+                    th:text="${error}">
+                </li>
+            </ul>
+        </div>
+
         <div th:if="${#strings.isEmpty(name)}" class="glass-panel mb-4">
             <p class="mb-0">Enter location name to search.</p>
         </div>

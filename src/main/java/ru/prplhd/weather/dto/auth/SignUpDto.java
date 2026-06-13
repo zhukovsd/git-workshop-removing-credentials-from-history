@@ -21,5 +21,6 @@ public record SignUpDto(
         )
         String password,
 
-        String confirmPassword){
+        @NotBlank(message = "Password confirmation is required")
+        String confirmPassword) {
 }
