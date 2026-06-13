@@ -14,6 +14,8 @@ import tools.jackson.databind.json.JsonMapper;
 import java.net.http.HttpClient;
 import java.time.Clock;
 import java.time.Duration;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @Configuration
 @PropertySource("classpath:app.properties")
@@ -67,5 +69,10 @@ public class AppConfig {
                 env.getRequiredProperty("openweather.base-url"),
                 env.getRequiredProperty("openweather.api-key")
         );
+    }
+
+    @Bean(destroyMethod = "shutdown")
+    public ExecutorService weatherApiExecutor() {
+        return Executors.newFixedThreadPool(8);
     }
 }

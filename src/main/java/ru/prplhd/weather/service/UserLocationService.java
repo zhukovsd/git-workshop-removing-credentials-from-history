@@ -19,6 +19,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
 
 @Service
 @Transactional(readOnly = true)
@@ -28,18 +30,20 @@ public class UserLocationService {
     private final UserRepository userRepository;
 
     private final OpenWeatherApiClient openWeatherApiClient;
+    private final ExecutorService weatherApiExecutor;
 
     private final LocationWeatherViewMapper locationWeatherViewMapper;
     private final LocationMapper locationMapper;
 
     public UserLocationService(
             LocationRepository locationRepository, UserRepository userRepository,
-            OpenWeatherApiClient openWeatherApiClient,
+            OpenWeatherApiClient openWeatherApiClient, ExecutorService weatherApiExecutor,
             LocationWeatherViewMapper locationWeatherViewMapper, LocationMapper locationMapper
     ) {
         this.locationRepository = locationRepository;
         this.userRepository = userRepository;
         this.openWeatherApiClient = openWeatherApiClient;
+        this.weatherApiExecutor = weatherApiExecutor;
         this.locationWeatherViewMapper = locationWeatherViewMapper;
         this.locationMapper = locationMapper;
     }
@@ -47,23 +51,29 @@ public class UserLocationService {
     public List<LocationWeatherViewDto> findUserLocationsWithCurrentWeather(Long userId) {
         List<LocationEntity> userLocations = locationRepository.findAllByUserId(userId);
 
-        List<LocationWeatherViewDto> result = new ArrayList<>();
+        List<CompletableFuture<LocationWeatherViewDto>> futures = new ArrayList<>();
 
         for (LocationEntity userLocation : userLocations) {
             BigDecimal latitude = userLocation.getLatitude();
             BigDecimal longitude = userLocation.getLongitude();
 
-            WeatherResponseDto weatherResponseDto = openWeatherApiClient.getLocationCurrentWeather(
-                    latitude,
-                    longitude
-            );
+            futures.add(
+                    CompletableFuture.supplyAsync(() -> {
+                                WeatherResponseDto weatherResponseDto = openWeatherApiClient.getLocationCurrentWeather(latitude, longitude);
 
-            LocationWeatherViewDto viewDto = locationWeatherViewMapper.toViewDto(
-                    userLocation,
-                    weatherResponseDto
+                                return locationWeatherViewMapper.toViewDto(
+                                        userLocation,
+                                        weatherResponseDto
+                                );
+                            }, weatherApiExecutor
+                    )
             );
+        }
 
-            result.add(viewDto);
+        List<LocationWeatherViewDto> result = new ArrayList<>();
+
+        for (CompletableFuture<LocationWeatherViewDto> future : futures) {
+            result.add(future.join());
         }
 
         return result;
