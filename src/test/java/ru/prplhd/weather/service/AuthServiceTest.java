@@ -51,22 +51,22 @@ class AuthServiceTest {
     private static final SignInDto VALID_SIGN_IN_DTO = new SignInDto(VALID_LOGIN, VALID_PASSWORD);
 
     @Autowired
-    AuthService authService;
+    private AuthService authService;
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    SessionRepository sessionRepository;
+    private SessionRepository sessionRepository;
 
     @Autowired
-    PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
-    Clock clock;
+    private Clock clock;
 
     @Autowired
-    Duration sessionTtl;
+    private Duration sessionTtl;
 
     @Test
     @DisplayName("Sign up with valid data creates user in database")

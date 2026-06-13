@@ -18,7 +18,7 @@ dependencies {
     testImplementation("org.assertj:assertj-core:3.27.7")
     testImplementation("org.glassfish.expressly:expressly:5.0.0")
     testImplementation("org.wiremock:wiremock:3.13.2")
-//    testImplementation("org.mockito:mockito-junit-jupiter:5.23.0")
+    testImplementation("org.mockito:mockito-junit-jupiter:5.23.0")
 
     implementation(platform("org.springframework:spring-framework-bom:7.0.7"))
     implementation(platform("org.springframework.data:spring-data-bom:2025.1.5"))
@@ -67,6 +67,18 @@ tasks.register<Test>("httpServerTest") {
 
     useJUnitPlatform {
         includeTags("httpServer")
+    }
+
+    testClassesDirs = sourceSets["test"].output.classesDirs
+    classpath = sourceSets["test"].runtimeClasspath
+}
+
+tasks.register<Test>("locationWeatherTest") {
+    group = "verification"
+    description = "Runs tests tagged \"Location Weather\""
+
+    useJUnitPlatform {
+        includeTags("locationWeather")
     }
 
     testClassesDirs = sourceSets["test"].output.classesDirs

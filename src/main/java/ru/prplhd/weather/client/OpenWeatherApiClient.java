@@ -16,7 +16,7 @@ import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.List;
 
-public class OpenWeatherApiClient {
+public class OpenWeatherApiClient implements WeatherApiClient{
 
     private static final String GEOCODING_URL_TEMPLATE =
             "%s/geo/1.0/direct?q=%s&limit=%d&appid=%s";
