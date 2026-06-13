@@ -41,22 +41,22 @@ public class GlobalExceptionHandler {
         return modelAndView;
     }
 
-    @ExceptionHandler(Exception.class)
-    public ModelAndView handleUnexpectedException (Exception ignored) {
-        ModelAndView modelAndView = new ModelAndView("error");
-
-        modelAndView.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-        modelAndView.addObject("message", "Internal server error. Please try again later.");
-
-        return modelAndView;
-    }
-
     @ExceptionHandler(OpenWeatherApiException.class)
     public ModelAndView handleOpenWeatherApiException (OpenWeatherApiException e) {
         ModelAndView modelAndView = new ModelAndView("error");
 
         modelAndView.setStatus(HttpStatus.SERVICE_UNAVAILABLE);
         modelAndView.addObject("message", e.getMessage());
+
+        return modelAndView;
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ModelAndView handleUnexpectedException (Exception ignored) {
+        ModelAndView modelAndView = new ModelAndView("error");
+
+        modelAndView.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+        modelAndView.addObject("message", "Internal server error. Please try again later.");
 
         return modelAndView;
     }

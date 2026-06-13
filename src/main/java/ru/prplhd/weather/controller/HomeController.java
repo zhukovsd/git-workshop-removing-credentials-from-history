@@ -21,11 +21,7 @@ public class HomeController {
     public String home(@RequestAttribute("authenticatedUserDto") AuthenticatedUserDto userDto,
                        Model model
     ) {
-        List<LocationWeatherViewDto> locations = List.of();
-
-        if (userDto != null) {
-            locations = userLocationService.findUserLocationsWithCurrentWeather(userDto.id());
-        }
+        List<LocationWeatherViewDto> locations = userLocationService.findUserLocationsWithCurrentWeather(userDto.id());
 
         model.addAttribute("locations", locations);
         return "index";
