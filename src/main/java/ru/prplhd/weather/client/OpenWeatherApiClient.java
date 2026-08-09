@@ -21,25 +21,26 @@ public class OpenWeatherApiClient {
     private static final String GEOCODING_URL_TEMPLATE =
             "%s/geo/1.0/direct?q=%s&limit=%d&appid=%s";
 
-    private static final int GEOCODING_LIMIT = 4;
-
     private static final String CURRENT_WEATHER_URL_TEMPLATE =
             "%s/data/2.5/weather?lat=%s&lon=%s&appid=%s&units=metric";
 
     private final HttpClient httpClient;
     private final JsonMapper jsonMapper;
+
     private final String baseUrl;
+    private final int limit;
     private final String apiKey;
 
     public OpenWeatherApiClient(
             HttpClient httpClient,
             JsonMapper jsonMapper,
-            String baseUrl,
+            String baseUrl, int limit,
             String apiKey
     ) {
         this.httpClient = httpClient;
         this.jsonMapper = jsonMapper;
         this.baseUrl = baseUrl;
+        this.limit = limit;
         this.apiKey = apiKey;
     }
 
@@ -73,7 +74,7 @@ public class OpenWeatherApiClient {
         String urlString = GEOCODING_URL_TEMPLATE.formatted(
                 baseUrl,
                 encodedQuery,
-                GEOCODING_LIMIT,
+                limit,
                 apiKey
         );
 

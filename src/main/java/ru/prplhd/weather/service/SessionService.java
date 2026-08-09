@@ -80,4 +80,9 @@ public class SessionService {
     public void deleteSession(UUID sessionId) {
         sessionRepository.deleteById(sessionId);
     }
+
+    @Transactional
+    public void deleteExpiredSessions() {
+        sessionRepository.deleteExpiredSessions(clock.instant());
+    };
 }

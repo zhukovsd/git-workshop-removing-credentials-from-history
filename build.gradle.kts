@@ -17,6 +17,7 @@ dependencies {
     testImplementation("org.springframework:spring-test")
     testImplementation("org.assertj:assertj-core:3.27.7")
     testImplementation("org.glassfish.expressly:expressly:5.0.0")
+    testImplementation("org.wiremock:wiremock:3.13.2")
 //    testImplementation("org.mockito:mockito-junit-jupiter:5.23.0")
 
     implementation(platform("org.springframework:spring-framework-bom:7.0.7"))
@@ -54,6 +55,18 @@ tasks.register<Test>("authTest") {
 
     useJUnitPlatform {
         includeTags("auth")
+    }
+
+    testClassesDirs = sourceSets["test"].output.classesDirs
+    classpath = sourceSets["test"].runtimeClasspath
+}
+
+tasks.register<Test>("httpServerTest") {
+    group = "verification"
+    description = "Runs tests tagged \"Http Server\""
+
+    useJUnitPlatform {
+        includeTags("httpServer")
     }
 
     testClassesDirs = sourceSets["test"].output.classesDirs
